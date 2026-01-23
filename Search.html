@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search - edodnan</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+
+  .search-container {
+    padding: 20px;
+    background-color: #f2f2f2;
+    max-width: 900px;
+    width: 100%;
+    margin: auto;
+    border-radius: 8px;
+  }
+
+  .search-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .search-box {
+    padding: 10px;
+    font-size: 16px;
+    flex: 1;
+  }
+
+  .search-button {
+    padding: 10px 16px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .suggestion {
+    margin-top: 8px;
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+    footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    bottom: 0;
+    width: 100%;
+  }
+  .links-container {
+    display: flex;
+    justify-content: flex-start; /* centers the links horizontally */
+    gap: 30px; /* space between links */
+  }
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="links-container">
+   <a href="https://edodnan.com.au"> <img src="images/house.png" hight="100" width="100"> </a>
+   <h1>Search for your article</h1>
+  </div>
+  <div class="search-container">
+    <label for="site-search">Search the site:</label>
+
+    <div class="search-row">
+      <input type="search" id="site-search" class="search-box" placeholder="Enter query...">
+      <button class="search-button" onclick="handleSearch()">Search</button>
+    </div>
+
+    <div id="result"></div>
+  </div>
+</header>
+<main>
+<script>
+  // 🔹 Searchable pages (simple list, spaces allowed)
+  const pages = [
+    "The creation of the universe",
+    "The big bang theory",
+    "The expanding universe theory"
+  ];
+
+  // 🔧 Turn titles into clean URL slugs
+  function makeSlug(text) {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "-");
+  }
+
+  function handleSearch() {
+    const inputRaw = document.getElementById("site-search").value.trim();
+    const input = inputRaw.toLowerCase().replace(/-/g, " ");
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = "";
+
+    if (!input) return;
+
+    // ✅ Exact match → go straight to page
+    const exact = pages.find(
+      page => page.toLowerCase() === input
+    );
+
+    if (exact) {
+      window.location.href =
+        "https://edodnan.com.au/search/" + makeSlug(exact) + ".html";
+      return;
+    }
+
+    // 🔍 Score and sort pages by similarity
+    const scored = pages.map(page => ({
+      page,
+      score: similarity(input, page.toLowerCase())
+    }))
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+    if (scored.length === 0) {
+      resultDiv.textContent = "No results found.";
+      return;
+    }
+
+    // ✅ Show up to 20 results (only if more than 20 pages exist)
+    const limit = pages.length > 20 ? 20 : scored.length;
+    const topResults = scored.slice(0, limit);
+
+    topResults.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "suggestion";
+      div.textContent = item.page;
+      div.onclick = () => {
+        window.location.href =
+          "https://edodnan.com.au/search/" + makeSlug(item.page) + ".html";
+      };
+      resultDiv.appendChild(div);
+    });
+  }
+
+  // 🔍 Simple similarity checker
+  function similarity(a, b) {
+    let matches = 0;
+    for (let char of a) {
+      if (b.includes(char)) matches++;
+    }
+    return matches;
+  }
+</script>
+ <a href="https://edodnan.com.au/help.html"> <p> Click here to add your own articals</p> </a>
+</main>
+  <pre>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    
+
+
+    
+    
+  </pre>
+  <footer>
+  <p> <u> Want to see more? </u> </p>
+      <div class="links-container">
+     <p> For more information, contact "theone7736@gmail.com" </p>
+    <a onclick="window.open('https://scratch.mit.edu/users/Dinominatot', '_blank')"> <img src="images/Scratch.png" width="50" height="50"></a>
+      <a onclick="window.open('https://m.youtube.com/channel/UCHG29aks1jxYFaLYt3BZLyw', '_blank')"> <img src="images/YouTube.png" width="50" height="50">
+     <a onclick="window.open('https://edodnan.my.canva.site', '_blank')"> <img src="images/Canva.png" width="50" height="50"></a>
+   <p> © 2025 Edodnan All rights  reserved </p>
+      </div>
+  </footer>
+</body>
+</html>
