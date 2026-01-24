@@ -1,18 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title> Search - Edodnan </title>
-  <style>
-    h1 {   
-   font-family: "Sans-serif";
-   }
-    
-  </style>
+  <meta charset="UTF-8">
+  <title>Firebase Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <h1>Search here</h1>
-  <script async src="https://cse.google.com/cse.js?cx=6725a052d16074e02">
+
+<h1>Search Articles</h1>
+
+<input id="q" placeholder="Search..." />
+<button onclick="search()">Search</button>
+
+<div id="results"></div>
+
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    limit,
+    getDocs
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  // 🔹 YOUR FIREBASE CONFIG
+  const firebaseConfig = {
+    apiKey: "YOUR_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "XXXX",
+    appId: "XXXX"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  window.search = async function () {
+    const q = document.getElementById("q").value
+      .toLowerCase()
+      .trim()
+      .split(/\s+/);
+
+    if (q.length === 0) return;
+
+    const resultsDiv = document.getElementById("results");
+    resultsDiv.innerHTML = "Searching...";
+
+    // 🔍 keyword-based search
+    const qRef = query(
+      collection(db, "pages"),
+      where("keywords", "array-contains-any", q),
+      limit(20)
+    );
+
+    const snap = await getDocs(qRef);
+
+    resultsDiv.innerHTML = "";
+
+    if (snap.empty) {
+      resultsDiv.innerHTML = "No results found";
+      return;
+    }
+
+    snap.forEach(doc => {
+      const data = doc.data();
+      const div = document.createElement("div");
+      div.innerHTML = `
+        <a href="${data.url}">
+          <strong>${data.title}</strong>
+        </a>
+        <p>${data.content.slice(0, 120)}...</p>
+        <hr>
+      `;
+      resultsDiv.appendChild(div);
+    });
+  };
 </script>
-<div class="gcse-search"></div>
+
 </body>
 </html>
