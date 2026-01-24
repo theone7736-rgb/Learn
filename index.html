@@ -1,85 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Firebase Search</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search - edodnan</title>
+
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+  .search-container { padding: 20px; background:#f2f2f2; max-width:900px; margin:auto; border-radius:8px; }
+  .search-row { display:flex; gap:10px; }
+  .search-box { padding:10px; font-size:16px; flex:1; }
+  .search-button { padding:10px 16px; font-size:16px; cursor:pointer; }
+  .suggestion { margin-top:8px; color:blue; cursor:pointer; text-decoration:underline; }
+  footer { background:#222; color:white; text-align:center; padding:15px; }
+  .links-container { display:flex; gap:30px; align-items:center; }
+</style>
 </head>
+
 <body>
 
-<h1>Search Articles</h1>
+<header>
+  <div class="links-container">
+    <a href="https://edodnan.com.au">
+      <img src="images/house.png" width="100">
+    </a>
+    <h1>Search for your article</h1>
+  </div>
 
-<input id="q" placeholder="Search..." />
-<button onclick="search()">Search</button>
+  <div class="search-container">
+    <label>Search the site:</label>
+    <div class="search-row">
+      <input id="site-search" class="search-box" placeholder="Enter query...">
+      <button class="search-button" onclick="handleSearch()">Search</button>
+    </div>
+    <div id="result"></div>
+  </div>
+</header>
 
-<div id="results"></div>
+<main>
 
-<!-- Firebase SDK -->
+<!-- Firebase -->
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import {
-    getFirestore,
-    collection,
-    query,
-    where,
-    limit,
-    getDocs
-  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-  // 🔹 YOUR FIREBASE CONFIG
-  const firebaseConfig = {
-    apiKey: "YOUR_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "XXXX",
-    appId: "XXXX"
-  };
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+};
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-  window.search = async function () {
-    const q = document.getElementById("q").value
-      .toLowerCase()
-      .trim()
-      .split(/\s+/);
+let pages = [];
 
-    if (q.length === 0) return;
+// Load articles once
+async function loadArticles() {
+  const snap = await getDocs(collection(db, "articles"));
+  pages = snap.docs.map(doc => doc.data());
+}
+loadArticles();
 
-    const resultsDiv = document.getElementById("results");
-    resultsDiv.innerHTML = "Searching...";
+// Similarity function (your logic)
+function similarity(a, b) {
+  let matches = 0;
+  for (let char of a) {
+    if (b.includes(char)) matches++;
+  }
+  return matches;
+}
 
-    // 🔍 keyword-based search
-    const qRef = query(
-      collection(db, "pages"),
-      where("keywords", "array-contains-any", q),
-      limit(20)
-    );
+window.handleSearch = function () {
+  const input = document.getElementById("site-search").value
+    .toLowerCase().trim().replace(/-/g, " ");
 
-    const snap = await getDocs(qRef);
+  const resultDiv = document.getElementById("result");
+  resultDiv.innerHTML = "";
+  if (!input) return;
 
-    resultsDiv.innerHTML = "";
+  // Exact match
+  const exact = pages.find(p => p.title.toLowerCase() === input);
+  if (exact) {
+    window.location.href =
+      "https://edodnan.com.au/search/" + exact.slug + ".html";
+    return;
+  }
 
-    if (snap.empty) {
-      resultsDiv.innerHTML = "No results found";
-      return;
-    }
+  // Scored results
+  const scored = pages
+    .map(p => ({
+      ...p,
+      score: similarity(input, p.title.toLowerCase())
+    }))
+    .filter(p => p.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 20);
 
-    snap.forEach(doc => {
-      const data = doc.data();
-      const div = document.createElement("div");
-      div.innerHTML = `
-        <a href="${data.url}">
-          <strong>${data.title}</strong>
-        </a>
-        <p>${data.content.slice(0, 120)}...</p>
-        <hr>
-      `;
-      resultsDiv.appendChild(div);
-    });
-  };
+  if (!scored.length) {
+    resultDiv.textContent = "No results found.";
+    return;
+  }
+
+  scored.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "suggestion";
+    div.textContent = p.title;
+    div.onclick = () => {
+      window.location.href =
+        "https://edodnan.com.au/search/" + p.slug + ".html";
+    };
+    resultDiv.appendChild(div);
+  });
+};
 </script>
+
+<a href="https://edodnan.com.au/help.html">
+  <p>Click here to add your own articles</p>
+</a>
+
+</main>
+
+<footer>
+  <p><u>Want to see more?</u></p>
+  <div class="links-container">
+    <p>Contact: theone7736@gmail.com</p>
+    <img src="images/Scratch.png" width="50">
+    <img src="images/YouTube.png" width="50">
+    <img src="images/Canva.png" width="50">
+  </div>
+  <p>© 2025 Edodnan All rights reserved</p>
+</footer>
 
 </body>
 </html>
