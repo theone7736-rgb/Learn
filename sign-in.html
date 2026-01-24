@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign In – Edodnan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, sans-serif;
+      background: #f2f2f2;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      text-align: center;
+      width: 300px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background: #4285F4;
+      color: white;
+      width: 100%;
+    }
+
+    button:hover {
+      background: #357ae8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Edodnan</h1>
+    <button id="googleSignIn">Sign in with Google</button>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import {
+      getAuth,
+      GoogleAuthProvider,
+      signInWithPopup,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    // 🔴 REPLACE WITH YOUR REAL CONFIG
+    const firebaseConfig = {
+      apiKey: "AIzaSyDCTnQT6R3KVBi6y0ba4UV2fgL7c9JuFqA",
+  authDomain: "edodnan-sign-in.firebaseapp.com",
+  projectId: "edodnan-sign-in",
+  storageBucket: "edodnan-sign-in.firebasestorage.app",
+  messagingSenderId: "816755697914",
+  appId: "1:816755697914:web:c9d29e3b447dfb6f290143"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    const REDIRECT_URL = "https://edodnan.com.au/home-page";
+
+    // ✅ Auto-redirect if already signed in
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        window.location.replace(REDIRECT_URL);
+      }
+    });
+
+    // ✅ Google sign-in button
+    document.getElementById("googleSignIn").addEventListener("click", async () => {
+      try {
+        await signInWithPopup(auth, provider);
+        window.location.replace(REDIRECT_URL);
+      } catch (error) {
+        alert("Sign in failed");
+        console.error(error);
+      }
+    });
+  </script>
+
+</body>
+</html>
