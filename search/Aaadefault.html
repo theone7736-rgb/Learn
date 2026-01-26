@@ -207,7 +207,8 @@
 
     <!-- Sidebar -->
     <div class="right-rectangle">
-      <h2>More like this</h2>
+      <h2>Contents</h2>
+     <button onclick="scrollPage(150)">The Big Bang theory</button>
     </div>
   </div>
 
@@ -215,6 +216,14 @@
   <footer>
     <p>© 2026 Edodnan. All rights reserved.</p>
   </footer>
-
+<script>
+  function scrollPage(amount) {
+    window.scrollBy({
+      top: amount,
+      left: 0,
+      behavior: "smooth"
+    });
+  }
+</script>
 </body>
 </html>
