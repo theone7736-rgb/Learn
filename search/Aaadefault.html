@@ -212,12 +212,15 @@
     </div>
   </div>
 <script>
-  function scrollToObject(id) {
-    document.getElementById(id).scrollIntoView({
-      behavior: "smooth",
-      block: "start"   // start | center | end
-    });
-  }
+function scrollToObject(id) {
+  const el = document.getElementById(id);
+  const y = el.getBoundingClientRect().top + window.pageYOffset - 100; // 100px offset
+
+  window.scrollTo({
+    top: y,
+    behavior: 'smooth'
+  });
+}
 </script>
   <!-- Footer -->
   <footer>
