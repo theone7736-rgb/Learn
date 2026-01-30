@@ -6,6 +6,30 @@
 <title>Search - edodnan</title>
 
 <style>
+  .horizontal-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+}
+
+.card {
+  min-width: 220px;
+  height: 140px;
+  background: #f2f2f2;
+  border-radius: 8px;
+  padding: 15px;
+  text-decoration: none;
+  color: black;
+  flex-shrink: 0;
+}
+
+.card:hover {
+  background: #e0e0e0;
+}
+
   body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
   .search-container { padding: 20px; background:#f2f2f2; max-width:900px; margin:auto; border-radius:8px; }
   .search-row { display:flex; gap:10px; }
@@ -123,8 +147,16 @@ window.handleSearch = function () {
   <p>Click here to add your own articles</p>
 </a>
 <h2>See our newest reads</h2>
-<--scroll start-->
-<--scroll end-->
+<!--scroll start-->
+  <div class="horizontal-scroll">
+  <a class="card" href="#">Article 1</a>
+  <a class="card" href="#">Article 2</a>
+  <a class="card" href="#">Article 3</a>
+  <a class="card" href="#">Article 4</a>
+  <a class="card" href="#">Article 5</a>
+</div>
+
+<!--scroll end-->
 </main>
 <pre>
 
