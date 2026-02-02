@@ -1,8 +1,8 @@
 # Edodnan
-
+[![Open Edodnan](https://img.shields.io/badge/Open-Edodnan-purple)](https://edodnan.com.au) [![Open Edodnan](https://img.shields.io/badge/Open-Edodnan.5-blue)](https://Edodnan.my.canva.site) [![Open Edodnan](https://img.shields.io/badge/Open-Scratch-orange)](https://scratch.mit.edu/users/Dinominatot/) [![Open Edodnan](https://img.shields.io/badge/Open-Youtube-red)](https://scratch.mit.edu/users/Dinominatot/)  [![Open Learn](https://img.shields.io/badge/Open-Learn-green)](https://Learn.edodnan.com.au/)
 ## Contents
 - [What is Learn.edodnan.com.au](#what-is-learnedodnancomau)
-- [How to report or suggest](#how-to-report-problems)
+- [How to report or suggest](#how-to-report-or-suggest)
 
 ## What is Learn.edodnan.com.au
 Learn.edodnan.com.au is a branch of edodnan.com.au that focuses on being a place where all users can learn real things together, safely. We want everyone get acess to reliable information created by our writers and editors and fact-checked to that you are up-to-date on the coolest science facts. But we also teach things about math, computers,and we would love expanding this to something bigger.
