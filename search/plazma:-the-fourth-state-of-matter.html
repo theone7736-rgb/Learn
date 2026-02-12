@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plazma: the fourth state of matter</title>
+  <style>
+    button {
+    background-color: white;
+    font-size: 15px;
+    padding: 12px;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+    header {
+  height: 70px;
+  background: #9130e6;
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  padding: 0px;
+  color: white;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0px; /* sticks below the top-bar */
+  z-index: 99;
+}
+
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      width: 100%;
+      line-height: 1.6;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Top bar */
+    .top-bar {
+      height: 70px;
+      background: #821dcf;
+      display: flex;
+      justify-content: flex-end; /* Sign-in to right */
+      align-items: center;
+      padding: 0 20px;
+      position: relative;
+      color: white;
+    }
+
+    .top-bar .center-text {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
+    .top-bar h2,
+    .top-bar h4 {
+      margin: 0;
+    }
+
+    /* Responsive top-bar for mobile */
+    @media (max-width: 600px) {
+      .top-bar {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 20px;
+        align-items: center;
+      }
+
+      .top-bar .center-text {
+        position: static;
+        transform: none;
+        margin-bottom: 10px;
+      }
+    }
+
+    /* Header navigation */
+    header {
+      height: 70px;
+      background: #9130e6;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 0 20px;
+      color: white;
+      flex-wrap: wrap;
+    }
+
+    header h3 {
+      margin-right: 10px;
+    }
+
+    header a u {
+      text-decoration: underline;
+    }
+
+    /* Page layout */
+    .page {
+      display: flex;
+      gap: 30px;
+      padding: 20px;
+      flex-wrap: wrap;
+    }
+
+    main {
+      flex: 1;
+      max-width: 800px;
+      margin: 30px;
+    }
+
+    main p {
+      margin-bottom: 15px;
+    }
+
+    main h1, main h3 {
+      margin: 20px 0 10px;
+    }
+
+    /* Right rectangle / sidebar */
+    .right-rectangle {
+      text-align: center;
+      border-radius: 25px;
+      outline: 1px solid black;
+      width: 250px;
+      height: 300px;
+      background: white;
+      position: sticky;
+      top: 90px;
+    }
+
+    /* Footer */
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .right-rectangle {
+        display: none;
+      }
+    }
+    main h3 {
+    font-size: 25px;  
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="center-text">
+      <h2>Edodnan</h2>
+      <h4>The one for everyone</h4>
+    </div>
+    <a href="https://edodnan.com.au/sign-in.html"><u>Sign in</u></a>
+  </div>
+
+  <!-- Header Navigation -->
+  <header>
+    <h3>Edodnan:</h3>
+    <a href="https://learn.edodnan.com.au"><p><u>Search home</u></p></a>
+    <a href="https://edodnan.com.au"><p><u>See edodnan.com</u></p></a>
+    <a href="https://edodnan.com.au/games.html"><p><u>Play games</u></p></a>
+  </header>
+
+  <!-- Content + Sidebar -->
+  <div class="page">
+    <main>
+      <h1>Plazma: the fourth state of matter</h1>
+      <p>Artificial intelligence (AI) is technology that enables computers and software to perform tasks that usually require human intelligence. These tasks include understanding language, recognizing images and patterns, solving problems, and making decisions. AI works by learning from large amounts of data using algorithms that find patterns and improve over time, rather than being programmed with fixed rules for every situation.</p>
+      <p>Once trained, AI systems can use what they have learned to make predictions or take actions on new information. Although AI can appear intelligent, it does not think or feel like a human; it simply processes data very efficiently. Today, AI is used in many areas such as education, healthcare, transport, and entertainment, helping people work faster and solve complex problems.</p>
+      
+      <h3 id="1">What is plazma?</h3>
+     <p>Plasma is known as the fourth state of matter, distinct from solids, liquids, and gases, and it plays a fundamental role in the universe. While solids have tightly packed particles, liquids have particles that can move past one another, and gases have particles that move freely, plasma goes a step further. It forms when a gas is given so much energy that its atoms no longer remain intact. Instead of whole, neutral atoms, plasma consists of a mixture of positively charged ions and free-moving electrons. This separation of charge gives plasma its unique and powerful properties, making it very different from an ordinary gas.</p>
+
+<p>To understand how plasma forms, it helps to think about what happens when energy is added to matter. Heating a solid can turn it into a liquid, and heating a liquid can turn it into a gas. If heating continues far beyond that point, the gas particles begin to collide with such force that electrons are knocked off atoms. When enough atoms lose electrons, the gas becomes ionized and enters the plasma state. This process, called ionization, can also occur due to strong electric fields or intense radiation, not just high temperatures. Because of this, plasma can exist in environments ranging from extremely hot stars to relatively cool laboratory conditions.</p>
+
+<p>One of the most important characteristics of plasma is that it is electrically conductive. The free electrons and ions allow electric currents to flow easily through it. As a result, plasma responds strongly to electric and magnetic fields, which can shape, move, or confine it. This behavior does not occur in normal gases, whose particles are electrically neutral. Plasma often emits light as well, which is why many plasma phenomena appear as glowing or colorful displays. The specific color depends on the type of gas involved and the energy levels of its particles.</p>
+
+<p>Although plasma may seem exotic, it is actually the most common state of matter in the universe. Stars, including the Sun, are massive spheres of plasma where nuclear fusion takes place. The solar wind, which streams outward from the Sun, is also plasma, as are nebulae and much of the material found between stars and galaxies. On Earth, plasma is less common but still familiar. Lightning is a powerful example of plasma created by intense electric fields in the atmosphere. Neon signs and fluorescent lights use plasma to produce light, while plasma globes demonstrate how plasma responds to electric fields in a visually striking way.</p>
+
+<p>Plasma can exist in different forms depending on how much energy it contains. In hot, or thermal, plasma, all particles are at extremely high temperatures and are close to thermal equilibrium. This type of plasma is found in stars and experimental fusion reactors, where scientists attempt to replicate the processes that power the Sun. In contrast, cold, or non-thermal, plasma has electrons that are very energetic while the heavier ions remain relatively cool. This allows plasma to exist at or near room temperature, making it useful for practical applications such as medical sterilization, wound treatment, and the manufacturing of electronic components.</p>
+
+<p>The difference between plasma and gas is not always obvious at first glance, but it is crucial. A gas is made of neutral atoms or molecules and generally does not conduct electricity or respond to magnetic fields. Plasma, on the other hand, is made of charged particles that interact collectively, meaning their behavior is influenced not just by individual collisions but by long-range electric and magnetic forces. This collective behavior leads to complex motions, waves, and structures that scientists continue to study in both laboratory and space environments.</p>
+
+<p>Plasma is not only important for understanding the universe but also for advancing technology. Research into plasma physics contributes to efforts to achieve controlled nuclear fusion, which could provide a nearly limitless and clean source of energy. Plasma is used in industry to cut metals, coat surfaces, and create microchips. In medicine, carefully controlled plasma can kill bacteria without damaging healthy tissue. Spacecraft propulsion systems also use plasma to generate efficient thrust for long-duration missions.</p>
+
+<p>Despite its scientific importance, plasma is often misunderstood or overlooked in basic discussions of matter. Many people learn about solids, liquids, and gases early in school but encounter plasma only briefly, if at all. Yet plasma dominates the visible universe and underlies many natural and technological phenomena. From the light of the stars to the glow of a neon sign, plasma is a powerful reminder that matter can behave in surprising and fascinating ways when energy and electricity come into play.</p>
+
+
+      <h3 id="2">Where can we find plazma?</h3>
+      <p>Plasma is the fourth state of matter and appears when matter is pushed beyond the familiar boundaries of solids, liquids, and gases. To understand where plasma is found and how it forms, it helps to think of matter as something that changes its behavior depending on how much energy it contains. When energy is added to matter, its particles move faster and interact more violently. If enough energy is added to a gas, the atoms within it can no longer hold onto all of their electrons. Electrons are stripped away, leaving behind positively charged ions and a sea of free electrons. This mixture of charged particles is what defines plasma. Unlike a normal gas, plasma is electrically conductive and strongly influenced by electric and magnetic fields, which gives it behaviors that are both complex and fascinating.</p>
+
+<p>Plasma can form in several different ways, but the most common method is through extreme heating. When a gas is heated to very high temperatures, the collisions between particles become energetic enough to knock electrons off atoms. This process, known as thermal ionization, occurs naturally in environments such as stars, where temperatures reach millions of degrees. In these conditions, atoms cannot remain intact, and matter exists almost entirely as plasma. However, heat is not the only way plasma can form. Strong electric fields can also accelerate electrons to high speeds, allowing them to collide with atoms and ionize them. This is how plasma forms in lightning, neon signs, and many laboratory devices. Radiation, such as ultraviolet light or X-rays, can also ionize gases by directly ejecting electrons from atoms, producing plasma without the need for extreme heat.</p>
+
+<p>The universe is filled with plasma, making it the most common state of matter by far. Every star is a massive ball of plasma held together by gravity and powered by nuclear fusion in its core. The Sun, which provides light and heat to Earth, is made almost entirely of plasma, from its core to its outer atmosphere. Even the space between stars is not truly empty; it contains thin clouds of ionized gas and streams of plasma known as stellar winds. Nebulae, which appear as colorful clouds in space, glow because their plasma emits light at specific wavelengths. Galaxies themselves are threaded with plasma, and many cosmic phenomena, such as solar flares and cosmic jets, are driven by plasma interacting with intense magnetic fields.</p>
+
+<p>Closer to Earth, plasma is still present, though it is less obvious. One of the most dramatic examples is lightning, which forms when strong electric fields build up in storm clouds. These fields accelerate electrons through the air, ionizing it and creating a hot, glowing channel of plasma that we see as a lightning bolt. The temperature of lightning plasma can be several times hotter than the surface of the Sun, though it lasts only a fraction of a second. Auroras, commonly known as the Northern and Southern Lights, are another natural example of plasma. They form when charged particles from the Sun collide with gases in Earth’s upper atmosphere, ionizing them and causing them to glow in shifting patterns of color.</p>
+
+<p>Plasma is also found in many everyday technologies, even if it is not always recognized as such. Neon signs and fluorescent lamps rely on plasma to produce light. Inside these tubes, an electric current passes through a low-pressure gas, ionizing it and creating plasma. When the charged particles collide with gas atoms, they emit light, producing the bright colors seen in signs and lighting. Plasma televisions, though now less common, used tiny cells of plasma to generate images. Plasma globes, often used as educational toys or decorations, demonstrate how plasma responds to electric fields, with glowing filaments following the movement of a person’s hand across the glass.</p>
+
+<p>In laboratories and industrial settings, plasma is deliberately created and controlled for practical purposes. Cold, or non-thermal, plasma can be produced at relatively low temperatures using electric fields. In this type of plasma, the electrons are highly energetic while the heavier ions and neutral particles remain near room temperature. This makes cold plasma useful for applications where heat would be damaging. It is used to sterilize medical equipment, treat wounds, and clean surfaces at the microscopic level. In electronics manufacturing, plasma is used to etch tiny patterns onto silicon wafers, enabling the production of modern computer chips.</p>
+
+<p>Hot plasma, on the other hand, is created in environments where temperatures are extremely high. Experimental fusion reactors attempt to create and confine hot plasma using powerful magnetic fields. The goal of fusion research is to replicate the energy-producing processes of stars by forcing atomic nuclei to combine, releasing enormous amounts of energy. Although this plasma is difficult to control, it represents a potential future source of clean and abundant energy. In industrial metal cutting and welding, plasma torches generate intensely hot plasma jets capable of melting and slicing through steel with great precision.</p>
+
+<p>Fire is sometimes mistakenly thought of as plasma, but in reality it is only partially plasma. Most flames are made of hot gases and glowing particles, but certain regions within a flame can become ionized and behave like plasma under the right conditions. Similarly, sparks produced by electrical equipment are brief flashes of plasma created by rapid ionization of air. These examples show that plasma can exist temporarily and locally, even in environments that are otherwise cool and stable.</p>
+
+<p>What makes plasma especially interesting is that it does not behave like ordinary matter. Because it consists of charged particles, plasma is influenced by electromagnetic forces that can act over long distances. This leads to complex motions, waves, and structures that are not seen in solids, liquids, or gases. Plasma can form filaments, arcs, and swirling patterns, and it can be shaped or confined using magnetic fields. These properties are central to both natural phenomena, such as solar storms, and human-made technologies, such as fusion reactors and plasma engines for spacecraft.</p>
+
+<p>In summary, plasma forms when enough energy is added to a gas to ionize its atoms, separating electrons from nuclei and creating a charged mixture of particles. It can be created by heat, electric fields, or radiation, and it exists across an enormous range of temperatures and densities. Plasma is found throughout the universe in stars, space clouds, and cosmic winds, as well as on Earth in lightning, auroras, and many modern technologies. Although it is less familiar than solids, liquids, and gases, plasma is the dominant form of matter in the cosmos and a key player in both natural processes and advanced human innovation.</p>
+
+      <h3 id="3">What is a state of matter?</h3>
+      <p>A state of matter describes the physical form that matter takes based on how its particles are arranged, how much energy they have, and how they interact with one another. Matter itself is anything that has mass and takes up space, and it is made of tiny particles such as atoms and molecules. These particles are always moving, but the way they move and the forces between them determine whether matter appears as a solid, liquid, gas, plasma, or another less common state. States of matter are not defined by what a substance is made of, but by how its particles behave under certain conditions like temperature and pressure.</p>
+
+<p>At the most basic level, a state of matter depends on the balance between particle motion and the forces that pull particles together. When particles have very little energy, they move slowly and stay close to one another. As energy is added, usually in the form of heat, particles move faster and begin to spread out. This change in motion and spacing is what causes matter to change from one state to another. For example, when a solid is heated, its particles vibrate more strongly until they can break free from their fixed positions and flow as a liquid. If heating continues, the particles move fast enough to separate almost completely, forming a gas.</p>
+
+<p>A solid is a state of matter in which particles are tightly packed together in a fixed arrangement. The forces between the particles are strong, keeping them locked in place. Because of this, solids have a definite shape and a definite volume. Even though the particles in a solid are not completely still, their movement is limited to small vibrations around fixed positions. This is why solids resist changes in shape and volume and feel firm to the touch.</p>
+
+<p>A liquid is a state of matter where particles are still close together but no longer fixed in place. The forces between particles are weaker than in a solid, allowing them to slide past one another. As a result, liquids have a definite volume but no definite shape. They take the shape of their container while maintaining roughly the same amount of space. The particles in a liquid move more freely than in a solid but are still influenced by nearby particles, which is why liquids can flow but are not easily compressed.</p>
+
+<p>A gas is a state of matter in which particles have much more energy and move freely and rapidly in all directions. The forces between particles are very weak, so they spread far apart and rarely interact except during collisions. Because of this, gases have neither a definite shape nor a definite volume. They expand to fill any container they are in and can be easily compressed. The behavior of gases is strongly influenced by temperature and pressure, since changes in energy directly affect how fast the particles move.</p>
+
+<p>Plasma is often called the fourth state of matter and occurs when even more energy is added to a gas. In this state, particles move so energetically that electrons are stripped away from atoms, creating charged particles known as ions along with free electrons. Plasma behaves very differently from other states of matter because it is electrically conductive and responds to electric and magnetic fields. While plasma is less common on Earth, it is the most common state of matter in the universe, making up stars, glowing nebulae, and much of outer space.</p>
+
+<p>States of matter are not fixed categories, and matter can move from one state to another when conditions change. These changes are known as phase transitions. Melting occurs when a solid becomes a liquid, freezing when a liquid becomes a solid, evaporation or boiling when a liquid becomes a gas, and condensation when a gas becomes a liquid. Ionization occurs when a gas becomes plasma, and recombination happens when plasma returns to a gas. These transitions do not change the chemical identity of a substance, only the way its particles are arranged and how they move.</p>
+
+<p>Beyond the common states of matter, scientists have identified other states that occur under extreme or unusual conditions. Bose–Einstein condensates form at temperatures very close to absolute zero, where particles lose their individual identities and behave as a single quantum entity. Superfluids flow with no viscosity, and supercritical fluids exist at temperatures and pressures where the distinction between liquid and gas disappears. These exotic states show that the concept of states of matter is broader and more complex than the simple categories taught early in school.</p>
+
+<p>Understanding states of matter is essential because it explains how materials behave and change in everyday life as well as in extreme environments. It helps explain why ice melts, why steam rises, why air fills a room, and why stars shine. States of matter connect physics, chemistry, and even astronomy by showing how energy, particles, and forces interact to shape the physical world. Rather than being rigid labels, states of matter are descriptions of behavior, revealing how the same substance can exist in dramatically different forms depending on the conditions it experiences.</p>
+
+    </main>
+
+    <!-- Sidebar -->
+    <div class="right-rectangle">
+      <h2>Contents</h2>
+     <button onclick="scrollToObject('1')">What is plazma?</button>
+    <button onclick="scrollToObject('2')">Where can we find plazma?</button>
+   <button onclick="scrollToObject('3')">What is a state of matter?</button>
+    </div>
+  </div>
+<script>
+function scrollToObject(id) {
+  const el = document.getElementById(id);
+  const y = el.getBoundingClientRect().top + window.pageYOffset - 80; // 100px offset
+
+  window.scrollTo({
+    top: y,
+    behavior: 'smooth'
+  });
+}
+</script>
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Edodnan. All rights reserved.</p>
+  </footer>
+</body>
+</html>
