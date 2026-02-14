@@ -6,11 +6,20 @@
 <title>Search - edodnan</title>
 
 <style>
+   .blacksquare h3, p {
+   color: white;
+   padding: 10px;
+   }
+   .blacksquare {
+   background-color: black;
+   height: 520px;
+   width: 100%;
+   }
    .under-search-links{
    display: flex; 
    border-radius: 10px;
    height: 40px;
-   width: 250px;
+   width: 220px;
    background-color: forestgreen;
   align-items: center;      /* vertical */
   justify-content: center;
@@ -48,14 +57,16 @@
   background: #e0e0e0;
 }
 
-  body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f8f0ff; }
-  .search-container { padding: 20px; background:#f2f2f2; max-width:900px; margin:auto; border-radius:8px; }
+  body { font-family: Arial, sans-serif; margin: 0; background-color: #f8f0ff; }
+  .search-container { padding: 10px; background:#f2f2f2; height:60px; width:350px; margin:auto; border-radius:8px; }
   .search-row { display:flex; gap:10px; }
-  .search-box { padding:10px; font-size:16px; flex:1; }
-  .search-button { padding:10px 16px; font-size:16px; cursor:pointer; }
+  .search-box { padding:10px; font-size:16px; flex:1; height:10px; width: 200px;}
+  .search-button { height:10px; padding:10px 16px; font-size:16px; cursor:pointer; }
   .suggestion { margin-top:8px; color:blue; cursor:pointer; text-decoration:underline; }
   footer { background:#222; color:white; text-align:center; padding:15px; }
-  .links-container { display:flex; gap:30px; align-items:center; }
+  .links-container { display:flex; gap:20px; align-items:center; }
+ header { background-color: #7400B5; }
+header h1 { padding:10px;}
 </style>
 </head>
 
@@ -63,13 +74,20 @@
 
 <header>
   <div class="links-container">
-    <a href="https://learn.edodnan.com.au">
-      <img src="https://edodnan.com.au/images/web/icon.png" width="100">
-    </a>
     <h1>Search for your article</h1>
+     <div class="under-search-links"><a style="color: black; font-size: 20px; text-decoration: none;" target="_blank" rel="noopener noreferrer" href="https://edodnan.com.au/help.html">Add your own article</a></div>
+     <div class="under-search-links"><a style="color: black; font-size: 20px; text-decoration: none;" target="_blank" rel="noopener noreferrer" href="https://github.com/theone7736-rgb/Learn">GitHub reposetory</a></div>
   </div>
+</header>
 
-  <div class="search-container">
+<main>
+
+<!-- Firebase -->
+<div class="blacksquare">
+<div class="links-container">
+<img width="500px" height="500px" style="padding: 20px;" src="https://learn.edodnan.com.au/IMG/Plasma.png">
+<div>
+ <div class="search-container">
     <label>Search the site:</label>
     <div class="search-row">
       <input id="site-search" class="search-box" placeholder="Enter query...">
@@ -77,11 +95,24 @@
     </div>
     <div id="result"></div>
   </div>
-</header>
-
-<main>
-
-<!-- Firebase -->
+<h3>Plazma: the fourth state of matter</h3>
+<p>Explore the fourth and unknown state of matter, see it's capabilities and find out how and why it's so powerful.</p>
+<p>Plazma is undoutably a interating state of matter, because it's the fourth one. We all learned about the three syates of matter: solid, liquid and gass, but plazma enter the arena as the fourth state of matter. It undoutably wins in terms of power, but also curiocity and fascination.</p>
+</div>
+</div>
+</div>  
+<h2>See our newest reads</h2>
+<!--scroll start-->
+  <div class="horizontal-scroll">
+  <a class="card" href="https://learn.edodnan.com.au/search/TON-618:-The-biggest-black-hole.html"><h3>TON: The biggest black hole</h3><img height="200px" src="IMG/Black-hole.png"></a>
+  <a class="card" href="https://learn.edodnan.com.au/search/AI:-everything-you-need-to-know.html"><h3>AI: What is it, and what will it do</h3><img height="200px" src="IMG/AI.png"></a>
+  <a class="card" href="search/plazma:-the-fourth-state-of-matter.html"><h3>Plazma: the fourth state of matter</h3><img height="200px" src="IMG/Plasma.png">"</a>
+  <a class="card" href="#">Article 4</a>
+  <a class="card" href="#">Article 5</a>
+</div>
+<button><a href="https://learn.edodnan.com.au/us.html"> Learn about us here </a></button>
+<!--scroll end-->
+</main>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -160,23 +191,6 @@ window.handleSearch = function () {
   });
 };
 </script>
-<div style="margin-top: 40px;"></div>
-<div class="links-container">
-<div class="under-search-links"><a style="color: black; font-size: 20px; text-decoration: none;" target="_blank" rel="noopener noreferrer" href="https://edodnan.com.au/help.html">Add your own article</a></div>
-<div class="under-search-links"><a style="color: black; font-size: 20px; text-decoration: none;" target="_blank" rel="noopener noreferrer" href="https://github.com/theone7736-rgb/Learn">GitHub reposetory</a></div>
-</div>  
-<h2>See our newest reads</h2>
-<!--scroll start-->
-  <div class="horizontal-scroll">
-  <a class="card" href="https://learn.edodnan.com.au/search/TON-618:-The-biggest-black-hole.html"><h3>TON: The biggest black hole</h3><img height="200px" src="IMG/Black-hole.png"></a>
-  <a class="card" href="https://learn.edodnan.com.au/search/AI:-everything-you-need-to-know.html"><h3>AI: What is it, and what will it do</h3><img height="200px" src="IMG/AI.png"></a>
-  <a class="card" href="search/plazma:-the-fourth-state-of-matter.html"><h3>Plazma: the fourth state of matter</h3><img height="200px" src="IMG/Plasma.png">"</a>
-  <a class="card" href="#">Article 4</a>
-  <a class="card" href="#">Article 5</a>
-</div>
-<button><a href="https://learn.edodnan.com.au/us.html"> Learn about us here </a></button>
-<!--scroll end-->
-</main>
 <footer>
   <p><u>Want to see more?</u></p>
   <div class="links-container">
@@ -184,8 +198,8 @@ window.handleSearch = function () {
     <img src="https://edodnan.com.au/images/Scratch.png" width="50">
     <img src="https://edodnan.com.au/images/YouTube.png" width="50">
     <img src="https://edodnan.com.au/images/Canva.png" width="50">
+    <p>© 2025 Edodnan All rights reserved</p>
   </div>
-  <p>© 2025 Edodnan All rights reserved</p>
 </footer>
 
 </body>
