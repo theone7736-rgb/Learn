@@ -1,147 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Search - edodnan</title>
 
 <style>
-  :root {
-    max-width: 768px;
-  }
-
+  /* General text styles */
   body {
-    margin: 0;
     font-family: Arial, sans-serif;
+    margin: 0;
     background-color: #f8f0ff;
+    color: black;
   }
-
-  h1, h2, p {
-    color: white;
+  h1, h2, h3, p {
     margin: 0;
   }
-
+  h1, h2 {
+    color: #000;
+  }
   h3 {
     color: black;
   }
+  p {
+    line-height: 1.5;
+  }
 
-  /* ---------- HEADER ---------- */
+  /* Header */
   header {
     background-color: #7400B5;
     padding: 10px;
   }
-
+  header h1 {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
   .links-container {
     display: flex;
-    gap: 20px;
-    align-items: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 8px;
   }
-
   .under-search-links {
-    display: flex;
+    display: flex; 
+    border-radius: 10px;
+    height: 36px;
+    background-color: forestgreen;
     align-items: center;
     justify-content: center;
-    width: 200px;
-    height: 40px;
-    background-color: forestgreen;
-    border-radius: 10px;
+    width: 100%;
   }
-
   .under-search-links a {
     color: black;
-    font-size: 20px;
+    font-size: 16px;
     text-decoration: none;
+    text-align: center;
+    padding: 0 5px;
   }
 
-  /* ---------- HERO / BLACK GRID ---------- */
+  /* Black square section */
   .blacksquare {
+    display: flex;
+    flex-direction: column;
     background-color: black;
     width: 100%;
-    min-height: 540px;
-  }
-
-  .black-grid {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    grid-template-areas:
-      "search image"
-      "text   image";
-    gap: 20px;
-    padding: 20px;
-    align-items: start;
-  }
-
-  .search-area { grid-area: search; }
-  .text-area   { grid-area: text; }
-  .image-area  { grid-area: image; }
-
-  .image-area img {
-    width: 300px;
-    height: auto;
-  }
-
-  /* ---------- SEARCH ---------- */
-  .search-container {
-    background: #f2f2f2;
     padding: 10px;
-    border-radius: 8px;
-    width: 400px;
+    box-sizing: border-box;
+    gap: 10px;
   }
-
-  .search-row {
+  .blacksquare img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    align-self: center;
+    border-radius: 8px;
+  }
+  .up {
     display: flex;
+    flex-direction: column;
     gap: 10px;
   }
 
+  /* Search */
+  .search-container {
+    padding: 8px;
+    background: #f2f2f2;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .search-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
   .search-box {
-    flex: 1;
-    padding: 10px;
+    width: 100%;
+    padding: 8px;
     font-size: 16px;
     border-radius: 8px;
     border: 1px solid #ccc;
+    box-sizing: border-box;
   }
-
   .search-button {
-    padding: 6px 16px;
+    width: 100%;
+    padding: 8px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 8px;
     border: 1px solid #ccc;
     background-color: white;
+    transition: background 0.2s;
   }
-
   .search-button:hover {
     background-color: #e0e0e0;
   }
 
+  /* Suggestions */
   .suggestion {
-    margin-top: 5px;
-    padding: 10px;
     background-color: #f2f2f2;
     border-radius: 8px;
-    border: 1px solid #ccc;
-    color: black;
+    padding: 8px;
+    margin-top: 5px;
     cursor: pointer;
+    color: black;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: background 0.2s;
   }
-
   .suggestion:hover {
     background-color: #e0e0e0;
   }
 
-  /* ---------- HORIZONTAL SCROLL ---------- */
-  h2 { color: black; padding: 10px; }
-
+  /* Horizontal scroll cards */
   .horizontal-scroll {
     display: flex;
-    gap: 16px;
+    gap: 12px;
     overflow-x: auto;
-    padding: 10px 0;
+    overflow-y: hidden;
+    padding: 8px 0;
     scroll-behavior: smooth;
   }
-
   .card {
-    width: 230px;
+    width: 180px;
     flex-shrink: 0;
     background: #f2f2f2;
     border-radius: 8px;
@@ -150,23 +153,55 @@
     display: flex;
     flex-direction: column;
   }
-
   .card img {
     width: 100%;
-    height: 200px;
+    height: 150px;
     object-fit: cover;
     border-radius: 0 0 8px 8px;
   }
+  .card h3 {
+    padding: 8px;
+    font-size: 14px;
+  }
+  .card:hover {
+    background: #e0e0e0;
+  }
 
-  .card h3 { padding: 10px; margin: 0; }
-  .card:hover { background: #e0e0e0; }
-
-  /* ---------- FOOTER ---------- */
+  /* Footer */
   footer {
     background: #222;
     color: white;
     text-align: center;
     padding: 15px;
+    font-size: 14px;
+  }
+  footer img {
+    width: 40px;
+    margin: 0 4px;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 480px) {
+    header h1 {
+      font-size: 18px;
+    }
+    .under-search-links a {
+      font-size: 14px;
+    }
+    .search-box, .search-button {
+      font-size: 14px;
+      padding: 6px;
+    }
+    .card {
+      width: 140px;
+    }
+    .card img {
+      height: 120px;
+    }
+    .card h3 {
+      font-size: 12px;
+      padding: 6px;
+    }
   }
 </style>
 
@@ -178,80 +213,70 @@
     }
   })();
 </script>
+
 </head>
 
 <body>
 
 <header>
+  <h1>Search for your article</h1>
   <div class="links-container">
-    <h1 style="font-size: 26px;">Search for your article</h1>
     <div class="under-search-links">
-      <a href="https://edodnan.com.au/help.html" target="_blank">Add your own article</a>
+      <a target="_blank" rel="noopener noreferrer" href="https://edodnan.com.au/help.html">Add your own article</a>
     </div>
     <div class="under-search-links">
-      <a href="https://github.com/theone7736-rgb/Learn" target="_blank">GitHub repository</a>
+      <a target="_blank" rel="noopener noreferrer" href="https://github.com/theone7736-rgb/Learn">GitHub repository</a>
     </div>
   </div>
 </header>
 
 <main>
 
-<!-- ---------- HERO / BLACK GRID ---------- -->
-<div class="blacksquare">
-  <div class="black-grid">
-
-    <div class="search-area">
+  <!-- Black square section -->
+  <div class="blacksquare">
+    <a href="search/plazma:-the-fourth-state-of-matter.html">
+      <img src="https://learn.edodnan.com.au/IMG/Plasma.png" alt="Plasma">
+    </a>
+    <div class="up">
       <div class="search-container">
         <label>Search the site:</label>
         <div class="search-row">
-          <input id="site-search" class="search-box" placeholder="Enter query…">
+          <input id="site-search" class="search-box" placeholder="Enter query...">
           <button class="search-button" onclick="handleSearch()">Search</button>
         </div>
-        <div id="result"></div>
+        <div id="result" style="display:flex; flex-direction:column;"></div>
       </div>
-    </div>
-
-    <div class="image-area">
-      <a href="search/plazma:-the-fourth-state-of-matter.html">
-        <img src="https://learn.edodnan.com.au/IMG/Plasma.png" alt="Plasma">
-      </a>
-    </div>
-
-    <div class="text-area">
       <h1>Plazma: the fourth state of matter</h1>
-      <p><br>Explore the fourth and unknown state of matter, see its capabilities and find out how and why it's so powerful.</p>
-      <p><br>When people think of matter, they think of solids, liquids, and gases — but plasma is the fourth and most fascinating state.</p>
+      <p>Explore the fourth and unknown state of matter, see its capabilities and find out how and why it's so powerful.</p>
+      <p>Plazma is undoubtedly an interesting state of matter, because it's the fourth one. We all learned about the three states of matter: solid, liquid and gas, but plazma enters the arena as the fourth state of matter. It undoubtedly wins in terms of power, but also curiosity and fascination.</p>
     </div>
-
   </div>
-</div>
 
-<!-- ---------- HORIZONTAL SCROLL ---------- -->
-<h2>See our newest reads</h2>
-<div class="horizontal-scroll">
-  <a class="card" href="https://learn.edodnan.com.au/search/TON-618:-The-biggest-black-hole.html">
-    <h3>TON: The biggest black hole</h3>
-    <img src="IMG/Black-hole.png" alt="Black Hole">
-  </a>
-  <a class="card" href="https://learn.edodnan.com.au/search/AI:-everything-you-need-to-know.html">
-    <h3>AI: What is it, and what will it do</h3>
-    <img src="IMG/AI.png" alt="AI">
-  </a>
-  <a class="card" href="search/plazma:-the-fourth-state-of-matter.html">
-    <h3>Plazma: the fourth state of matter</h3>
-    <img src="IMG/Plasma.png" alt="Plasma">
-  </a>
-  <a class="card" href="#">Article 4</a>
-  <a class="card" href="#">Article 5</a>
-</div>
+  <h2 style="padding:10px;">See our newest reads</h2>
 
-<button style="margin:10px; padding:10px; border-radius:8px;">
-  <a href="https://learn.edodnan.com.au/us.html" style="text-decoration:none;">Learn about us here</a>
-</button>
+  <div class="horizontal-scroll">
+    <a class="card" href="https://learn.edodnan.com.au/search/TON-618:-The-biggest-black-hole.html">
+      <h3>TON: The biggest black hole</h3>
+      <img src="IMG/Black-hole.png" alt="Black Hole">
+    </a>
+    <a class="card" href="https://learn.edodnan.com.au/search/AI:-everything-you-need-to-know.html">
+      <h3>AI: What is it, and what will it do</h3>
+      <img src="IMG/AI.png" alt="AI">
+    </a>
+    <a class="card" href="search/plazma:-the-fourth-state-of-matter.html">
+      <h3>Plazma: the fourth state of matter</h3>
+      <img src="IMG/Plasma.png" alt="Plasma">
+    </a>
+    <a class="card" href="#">Article 4</a>
+    <a class="card" href="#">Article 5</a>
+  </div>
+
+  <button style="margin:10px; padding:10px; border-radius:8px; width: calc(100% - 20px);">
+    <a href="https://learn.edodnan.com.au/us.html" style="text-decoration:none;">Learn about us here</a>
+  </button>
 
 </main>
 
-<!-- ---------- SEARCH SCRIPT ---------- -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -262,74 +287,71 @@ const firebaseConfig = {
   projectId: "search-bb49c",
   storageBucket: "search-bb49c.firebasestorage.app",
   messagingSenderId: "24923619733",
-  appId: "1:24923619733:web:5979c3f590f77d75ae769c"
+  appId: "1:24923619733:web:5979c3f590f77d75ae769c",
+  measurementId: "G-3M4KLQTXVX"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 let pages = [];
-let loaded = false;
 
 async function loadArticles() {
   const snap = await getDocs(collection(db, "articles"));
   pages = snap.docs.map(doc => doc.data());
-  loaded = true;
 }
 loadArticles();
 
 function similarity(a, b) {
-  let score = 0;
-  for (const char of a) if (b.includes(char)) score++;
-  return score;
+  let matches = 0;
+  for (let char of a) if (b.includes(char)) matches++;
+  return matches;
 }
 
-window.handleSearch = function () {
+window.handleSearch = function() {
   const input = document.getElementById("site-search").value.toLowerCase().trim().replace(/-/g, " ");
-  const result = document.getElementById("result");
-  result.innerHTML = "";
-
-  if (!loaded) {
-    result.textContent = "Loading articles…";
-    return;
-  }
+  const resultDiv = document.getElementById("result");
+  resultDiv.innerHTML = "";
   if (!input) return;
 
   const exact = pages.find(p => p.title.toLowerCase() === input);
   if (exact) {
-    window.location.href = `https://learn.edodnan.com.au/search/${exact.slug}.html`;
+    window.location.href = "https://learn.edodnan.com.au/search/" + exact.slug + ".html";
     return;
   }
 
-  const matches = pages
+  const scored = pages
     .map(p => ({ ...p, score: similarity(input, p.title.toLowerCase()) }))
     .filter(p => p.score > 0)
     .sort((a, b) => b.score - a.score)
-    .slice(0, 10);
+    .slice(0, 20);
 
-  if (!matches.length) {
-    result.textContent = "No results found.";
+  if (!scored.length) {
+    resultDiv.textContent = "No results found.";
     return;
   }
 
-  matches.forEach(p => {
+  scored.forEach(p => {
     const div = document.createElement("div");
     div.className = "suggestion";
     div.textContent = p.title;
     div.onclick = () => {
-      window.location.href = `https://learn.edodnan.com.au/search/${p.slug}.html`;
+      window.location.href = "https://learn.edodnan.com.au/search/" + p.slug + ".html";
     };
-    result.appendChild(div);
+    resultDiv.appendChild(div);
   });
 };
-
-document.getElementById("site-search").addEventListener("keydown", e => {
-  if (e.key === "Enter") handleSearch();
-});
 </script>
 
 <footer>
-  <p>© 2025 Edodnan — All rights reserved</p>
+  <p><u>Want to see more?</u></p>
+  <div class="links-container" style="flex-direction: row; flex-wrap: wrap; gap: 5px; justify-content: center;">
+    <p>Contact: theone7736@gmail.com</p>
+    <img src="https://edodnan.com.au/images/Scratch.png" alt="Scratch">
+    <img src="https://edodnan.com.au/images/YouTube.png" alt="YouTube">
+    <img src="https://edodnan.com.au/images/Canva.png" alt="Canva">
+    <p>© 2025 Edodnan All rights reserved</p>
+  </div>
 </footer>
 
 </body>
