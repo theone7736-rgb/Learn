@@ -54,7 +54,7 @@
     text-decoration: none;
   }
 
-  /* ---------- HERO / BLACK SECTION ---------- */
+  /* ---------- HERO / BLACK GRID ---------- */
   .blacksquare {
     background-color: black;
     width: 100%;
@@ -129,6 +129,38 @@
     background-color: #e0e0e0;
   }
 
+  /* ---------- HORIZONTAL SCROLL ---------- */
+  h2 { color: black; padding: 10px; }
+
+  .horizontal-scroll {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 10px 0;
+    scroll-behavior: smooth;
+  }
+
+  .card {
+    width: 230px;
+    flex-shrink: 0;
+    background: #f2f2f2;
+    border-radius: 8px;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .card h3 { padding: 10px; margin: 0; }
+  .card:hover { background: #e0e0e0; }
+
   /* ---------- FOOTER ---------- */
   footer {
     background: #222;
@@ -164,6 +196,7 @@
 
 <main>
 
+<!-- ---------- HERO / BLACK GRID ---------- -->
 <div class="blacksquare">
   <div class="black-grid">
 
@@ -193,9 +226,32 @@
   </div>
 </div>
 
+<!-- ---------- HORIZONTAL SCROLL ---------- -->
+<h2>See our newest reads</h2>
+<div class="horizontal-scroll">
+  <a class="card" href="https://learn.edodnan.com.au/search/TON-618:-The-biggest-black-hole.html">
+    <h3>TON: The biggest black hole</h3>
+    <img src="IMG/Black-hole.png" alt="Black Hole">
+  </a>
+  <a class="card" href="https://learn.edodnan.com.au/search/AI:-everything-you-need-to-know.html">
+    <h3>AI: What is it, and what will it do</h3>
+    <img src="IMG/AI.png" alt="AI">
+  </a>
+  <a class="card" href="search/plazma:-the-fourth-state-of-matter.html">
+    <h3>Plazma: the fourth state of matter</h3>
+    <img src="IMG/Plasma.png" alt="Plasma">
+  </a>
+  <a class="card" href="#">Article 4</a>
+  <a class="card" href="#">Article 5</a>
+</div>
+
+<button style="margin:10px; padding:10px; border-radius:8px;">
+  <a href="https://learn.edodnan.com.au/us.html" style="text-decoration:none;">Learn about us here</a>
+</button>
+
 </main>
 
-<!-- ---------- SEARCH LOGIC ---------- -->
+<!-- ---------- SEARCH SCRIPT ---------- -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -229,11 +285,7 @@ function similarity(a, b) {
 }
 
 window.handleSearch = function () {
-  const input = document.getElementById("site-search").value
-    .toLowerCase()
-    .trim()
-    .replace(/-/g, " ");
-
+  const input = document.getElementById("site-search").value.toLowerCase().trim().replace(/-/g, " ");
   const result = document.getElementById("result");
   result.innerHTML = "";
 
@@ -241,7 +293,6 @@ window.handleSearch = function () {
     result.textContent = "Loading articles…";
     return;
   }
-
   if (!input) return;
 
   const exact = pages.find(p => p.title.toLowerCase() === input);
