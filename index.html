@@ -1,358 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"> 
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Search - edodnan</title>
-
 <style>
-  /* General text styles */
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f8f0ff;
-    color: black;
-  }
-  h1, h2, h3, p {
-    margin: 0;
-  }
-  h1, h2 {
-    color: #000;
-  }
-  h3 {
-    color: black;
-  }
-  p {
-    line-height: 1.5;
-  }
+/* General text styles */
+h1, h2, p { color: white; margin: 0; }
+h3 { color: black; }
+body { font-family: Arial, sans-serif; margin: 0; background-color: #f8f0ff; }
 
-  /* Header */
-  header {
-    background-color: #7400B5;
-    padding: 10px;
-  }
-  header h1 {
-    color: white;
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  .links-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .under-search-links {
-    display: flex; 
-    border-radius: 10px;
-    height: 36px;
-    background-color: forestgreen;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-  .under-search-links a {
-    color: black;
-    font-size: 16px;
-    text-decoration: none;
-    text-align: center;
-    padding: 0 5px;
-  }
+/* Header and links */
+header { background-color: #7400B5; padding: 10px; }
+header h1 { padding: 10px 0; }
+.links-container { display: flex; gap: 20px; align-items: center; }
+.under-search-links { display: flex; border-radius: 10px; height: 40px; width: 220px; background-color: forestgreen; align-items: center; justify-content: center; }
+.under-search-links a { color: black; font-size: 20px; text-decoration: none; }
 
-  /* Black square section */
-  .blacksquare {
-    display: flex;
-    flex-direction: column;
-    background-color: black;
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    gap: 10px;
-  }
-  .blacksquare img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    align-self: center;
-    border-radius: 8px;
-  }
-  .up {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+/* Black square section */
+.blacksquare { display: flex; background-color: black; width: 100%; height: 540px; }
+.blacksquare img { width: 500px; height: 500px; padding: 20px; }
+.up { display: flex; flex-direction: column; align-items: flex-start; }
+.up > div:first-child { height: 40px; }
 
-  /* Search */
-  .search-container {
-    padding: 8px;
-    background: #f2f2f2;
-    border-radius: 8px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .search-row {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .search-box {
-    width: 100%;
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-  .search-button {
-    width: 100%;
-    padding: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background-color: white;
-    transition: background 0.2s;
-  }
-  .search-button:hover {
-    background-color: #e0e0e0;
-  }
+/* Search styles */
+.search-container { padding: 10px; background: #f2f2f2; border-radius: 8px; width: 420px; }
+.search-row { display: flex; gap: 10px; }
+.search-box { flex: 1; padding: 10px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; box-sizing: border-box; }
+.search-button { padding: 3px 16px; font-size: 16px; cursor: pointer; border-radius: 8px; border: 1px solid #ccc; background-color: white; transition: background 0.2s; }
+.search-button:hover { background-color: #e0e0e0; }
 
-  /* Suggestions */
-  .suggestion {
-    background-color: #f2f2f2;
-    border-radius: 8px;
-    padding: 8px;
-    margin-top: 5px;
-    cursor: pointer;
-    color: black;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    width: 100%;
-    box-sizing: border-box;
-    transition: background 0.2s;
-  }
-  .suggestion:hover {
-    background-color: #e0e0e0;
-  }
+/* Suggestions */
+.suggestion { background-color: #f2f2f2; border-radius: 8px; padding: 10px; margin-top: 5px; cursor: pointer; color: black; border: 1px solid #ccc; font-size: 16px; width: 100%; box-sizing: border-box; transition: background 0.2s; }
+.suggestion:hover { background-color: #e0e0e0; }
 
-  /* Horizontal scroll cards */
-  .horizontal-scroll {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 8px 0;
-    scroll-behavior: smooth;
-  }
-  .card {
-    width: 180px;
-    flex-shrink: 0;
-    background: #f2f2f2;
-    border-radius: 8px;
-    text-decoration: none;
-    color: black;
-    display: flex;
-    flex-direction: column;
-  }
-  .card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 0 0 8px 8px;
-  }
-  .card h3 {
-    padding: 8px;
-    font-size: 14px;
-  }
-  .card:hover {
-    background: #e0e0e0;
-  }
+/* Horizontal scroll section */
+.horizontal-scroll { display: flex; gap: 16px; overflow-x: auto; overflow-y: hidden; padding: 10px 0; scroll-behavior: smooth; }
+.card { width: 230px; flex-shrink: 0; background: #f2f2f2; border-radius: 8px; text-decoration: none; color: black; display: flex; flex-direction: column; }
+.card img { width: 100%; height: 200px; object-fit: cover; border-radius: 0 0 8px 8px; display: block; }
+.card h3 { padding: 10px; margin: 0; }
+.card:hover { background: #e0e0e0; }
 
-  /* Footer */
-  footer {
-    background: #222;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    font-size: 14px;
-  }
-  footer img {
-    width: 40px;
-    margin: 0 4px;
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 480px) {
-    header h1 {
-      font-size: 18px;
-    }
-    .under-search-links a {
-      font-size: 14px;
-    }
-    .search-box, .search-button {
-      font-size: 14px;
-      padding: 6px;
-    }
-    .card {
-      width: 140px;
-    }
-    .card img {
-      height: 120px;
-    }
-    .card h3 {
-      font-size: 12px;
-      padding: 6px;
-    }
-  }
+/* Footer */
+footer { background: #222; color: white; text-align: center; padding: 15px; }
 </style>
-
 <script>
-  (function () {
+(function () {
     const isPhone = window.matchMedia("(max-width: 768px)").matches;
     if (isPhone && !window.location.pathname.startsWith("/mobile.html")) {
-      window.location.replace("/mobile.html");
+        window.location.replace("/mobile.html");
     }
-  })();
+})();
 </script>
-
 </head>
-
 <body>
-
 <header>
-  <h1>Search for your article</h1>
-  <div class="links-container">
-    <div class="under-search-links">
-      <a target="_blank" rel="noopener noreferrer" href="https://edodnan.com.au/help.html">Add your own article</a>
-    </div>
-    <div class="under-search-links">
-      <a target="_blank" rel="noopener noreferrer" href="https://github.com/theone7736-rgb/Learn">GitHub repository</a>
-    </div>
-  </div>
-</header>
-
-<main>
-
-  <!-- Black square section -->
-  <div class="blacksquare">
-    <a href="search/plazma:-the-fourth-state-of-matter.html">
-      <img src="https://learn.edodnan.com.au/IMG/Plasma.png" alt="Plasma">
-    </a>
-    <div class="up">
-      <div class="search-container">
-        <label>Search the site:</label>
-        <div class="search-row">
-          <input id="site-search" class="search-box" placeholder="Enter query...">
-          <button class="search-button" onclick="handleSearch()">Search</button>
+    <div class="links-container">
+        <h1>Search for your article</h1>
+        <div class="under-search-links">
+            <a target="_blank" rel="noopener noreferrer" href="https://edodnan.com.au/help.html">Add your own article</a>
         </div>
-        <div id="result" style="display:flex; flex-direction:column;"></div>
-      </div>
-      <h1>Plazma: the fourth state of matter</h1>
-      <p>Explore the fourth and unknown state of matter, see its capabilities and find out how and why it's so powerful.</p>
-      <p>Plazma is undoubtedly an interesting state of matter, because it's the fourth one. We all learned about the three states of matter: solid, liquid and gas, but plazma enters the arena as the fourth state of matter. It undoubtedly wins in terms of power, but also curiosity and fascination.</p>
+        <div class="under-search-links">
+            <a target="_blank" rel="noopener noreferrer" href="https://github.com/theone7736-rgb/Learn">GitHub repository</a>
+        </div>
     </div>
-  </div>
+</header>
+<main>
+    <!-- Black square section -->
+    <div class="blacksquare">
+        <a href="search/plazma:-the-fourth-state-of-matter.html">
+            <img src="https://learn.edodnan.com.au/IMG/Plasma.png" alt="Plasma">
+        </a>
+        <div class="up">
+            <div></div>
+            <div class="search-container">
+                <label>Search the site:</label>
+                <div class="search-row">
+                    <input id="site-search" class="search-box" placeholder="Enter query...">
+                    <button class="search-button" onclick="handleSearch()">Search</button>
+                </div>
+                <div id="result" style="display:flex; flex-direction:column;"></div>
+            </div>
+            <h1><br>Plazma: the fourth state of matter</h1>
+            <p><br>Explore the fourth and unknown state of matter, see its capabilities and find out how and why it's so powerful.</p>
+            <p><br>Plazma is undoubtedly an interesting state of matter, because it's the fourth one. We all learned about the three states of matter: solid, liquid and gas, but plazma enters the arena as the fourth state of matter. It undoubtedly wins in terms of power, but also curiosity and fascination.</p>
+        </div>
+    </div>
 
-  <h2 style="padding:10px;">See our newest reads</h2>
+    <h2 style="color:black; padding:10px;">See our newest reads</h2>
+    <div class="horizontal-scroll">
+        <a class="card" href="https://learn.edodnan.com.au/search/TON-618:-The-biggest-black-hole.html">
+            <h3>TON: The biggest black hole</h3>
+            <img src="IMG/Black-hole.png" alt="Black Hole">
+        </a>
+        <a class="card" href="https://learn.edodnan.com.au/search/AI:-everything-you-need-to-know.html">
+            <h3>AI: What is it, and what will it do</h3>
+            <img src="IMG/AI.png" alt="AI">
+        </a>
+        <a class="card" href="search/plazma:-the-fourth-state-of-matter.html">
+            <h3>Plazma: the fourth state of matter</h3>
+            <img src="IMG/Plasma.png" alt="Plasma">
+        </a>
+        <a class="card" href="#">Article 4</a>
+        <a class="card" href="#">Article 5</a>
+    </div>
 
-  <div class="horizontal-scroll">
-    <a class="card" href="https://learn.edodnan.com.au/search/TON-618:-The-biggest-black-hole.html">
-      <h3>TON: The biggest black hole</h3>
-      <img src="IMG/Black-hole.png" alt="Black Hole">
-    </a>
-    <a class="card" href="https://learn.edodnan.com.au/search/AI:-everything-you-need-to-know.html">
-      <h3>AI: What is it, and what will it do</h3>
-      <img src="IMG/AI.png" alt="AI">
-    </a>
-    <a class="card" href="search/plazma:-the-fourth-state-of-matter.html">
-      <h3>Plazma: the fourth state of matter</h3>
-      <img src="IMG/Plasma.png" alt="Plasma">
-    </a>
-    <a class="card" href="#">Article 4</a>
-    <a class="card" href="#">Article 5</a>
-  </div>
-
-  <button style="margin:10px; padding:10px; border-radius:8px; width: calc(100% - 20px);">
-    <a href="https://learn.edodnan.com.au/us.html" style="text-decoration:none;">Learn about us here</a>
-  </button>
-
+    <button style="margin:10px; padding:10px; border-radius:8px;">
+        <a href="https://learn.edodnan.com.au/us.html" style="text-decoration:none;">Learn about us here</a>
+    </button>
 </main>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDsBh4fUaeuEFZrp24c7yLYopZrQ4iFcV0",
-  authDomain: "search-bb49c.firebaseapp.com",
-  projectId: "search-bb49c",
-  storageBucket: "search-bb49c.firebasestorage.app",
-  messagingSenderId: "24923619733",
-  appId: "1:24923619733:web:5979c3f590f77d75ae769c",
-  measurementId: "G-3M4KLQTXVX"
+    apiKey: "AIzaSyDsBh4fUaeuEFZrp24c7yLYopZrQ4iFcV0",
+    authDomain: "search-bb49c.firebaseapp.com",
+    projectId: "search-bb49c",
+    storageBucket: "search-bb49c.firebasestorage.app",
+    messagingSenderId: "24923619733",
+    appId: "1:24923619733:web:5979c3f590f77d75ae769c",
+    measurementId: "G-3M4KLQTXVX"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
 let pages = [];
 
 async function loadArticles() {
-  const snap = await getDocs(collection(db, "articles"));
-  pages = snap.docs.map(doc => doc.data());
+    const snap = await getDocs(collection(db, "articles"));
+    pages = snap.docs.map(doc => doc.data());
 }
 loadArticles();
 
 function similarity(a, b) {
-  let matches = 0;
-  for (let char of a) if (b.includes(char)) matches++;
-  return matches;
+    let matches = 0;
+    for (let char of a) if (b.includes(char)) matches++;
+    return matches;
 }
 
 window.handleSearch = function() {
-  const input = document.getElementById("site-search").value.toLowerCase().trim().replace(/-/g, " ");
-  const resultDiv = document.getElementById("result");
-  resultDiv.innerHTML = "";
-  if (!input) return;
+    const input = document.getElementById("site-search").value.toLowerCase().trim().replace(/-/g, " ");
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = "";
+    if (!input) return;
 
-  const exact = pages.find(p => p.title.toLowerCase() === input);
-  if (exact) {
-    window.location.href = "https://learn.edodnan.com.au/search/" + exact.slug + ".html";
-    return;
-  }
+    const exact = pages.find(p => p.title.toLowerCase() === input);
+    if (exact) {
+        window.location.href = "https://learn.edodnan.com.au/search/" + exact.slug + ".html";
+        return;
+    }
 
-  const scored = pages
-    .map(p => ({ ...p, score: similarity(input, p.title.toLowerCase()) }))
-    .filter(p => p.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 20);
+    const scored = pages
+        .map(p => ({ ...p, score: similarity(input, p.title.toLowerCase()) }))
+        .filter(p => p.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 20);
 
-  if (!scored.length) {
-    resultDiv.textContent = "No results found.";
-    return;
-  }
+    if (!scored.length) {
+        resultDiv.textContent = "No results found.";
+        return;
+    }
 
-  scored.forEach(p => {
-    const div = document.createElement("div");
-    div.className = "suggestion";
-    div.textContent = p.title;
-    div.onclick = () => {
-      window.location.href = "https://learn.edodnan.com.au/search/" + p.slug + ".html";
-    };
-    resultDiv.appendChild(div);
-  });
+    scored.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "suggestion";
+        div.textContent = p.title;
+        div.onclick = () => {
+            window.location.href = "https://learn.edodnan.com.au/search/" + p.slug + ".html";
+        };
+        resultDiv.appendChild(div);
+    });
 };
 </script>
-
 <footer>
-  <p><u>Want to see more?</u></p>
-  <div class="links-container" style="flex-direction: row; flex-wrap: wrap; gap: 5px; justify-content: center;">
-    <p>Contact: theone7736@gmail.com</p>
-    <img src="https://edodnan.com.au/images/Scratch.png" alt="Scratch">
-    <img src="https://edodnan.com.au/images/YouTube.png" alt="YouTube">
-    <img src="https://edodnan.com.au/images/Canva.png" alt="Canva">
-    <p>© 2025 Edodnan All rights reserved</p>
-  </div>
+    <p><u>Want to see more?</u></p>
+    <div class="links-container">
+        <p>Contact: theone7736@gmail.com</p>
+        <img src="https://edodnan.com.au/images/Scratch.png" width="50">
+        <img src="https://edodnan.com.au/images/YouTube.png" width="50">
+        <img src="https://edodnan.com.au/images/Canva.png" width="50">
+        <p>© 2025 Edodnan All rights reserved</p>
+    </div>
 </footer>
-
 </body>
 </html>
