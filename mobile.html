@@ -9,7 +9,6 @@
   :root {
   max-width: 768px;
   }
-  /* General text styles */
   h1, h2, p {
     color: white;
     margin: 0;
@@ -165,6 +164,15 @@
   }
 
 </style>
+<script>
+  (function () {
+    const isPhone = window.matchMedia("(max-width: 768px)").matches;
+
+    if (isPhone && !window.location.pathname.startsWith("/mobile.html")) {
+      window.location.replace("/mobile.html");
+    }
+  })();
+</script>
 </head>
 
 <body>
@@ -186,6 +194,8 @@
 <!-- Black square section -->
 <div class="blacksquare">
  <a href="search/plazma:-the-fourth-state-of-matter.html"> <img src="https://learn.edodnan.com.au/IMG/Plasma.png" alt="Plasma"></a>
+  <div class="up">
+    <div></div>
     <div class="search-container">
       <label>Search the site:</label>
       <div class="search-row">
@@ -197,6 +207,7 @@
     <h1><br>Plazma: the fourth state of matter</h1>
     <p><br>Explore the fourth and unknown state of matter, see its capabilities and find out how and why it's so powerful.</p>
     <p><br>Plazma is undoubtedly an interesting state of matter, because it's the fourth one. We all learned about the three states of matter: solid, liquid and gas, but plazma enters the arena as the fourth state of matter. It undoubtedly wins in terms of power, but also curiosity and fascination.</p>
+  </div>
 </div>
 
 <h2 style="color:black; padding:10px;">See our newest reads</h2>
