@@ -162,6 +162,15 @@
   }
 
 </style>
+<script>
+  (function () {
+    const isPhone = window.matchMedia("(max-width: 768px)").matches;
+
+    if (isPhone && !window.location.pathname.startsWith("/phone")) {
+      window.location.replace("/phone");
+    }
+  })();
+</script>
 </head>
 
 <body>
