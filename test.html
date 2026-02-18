@@ -6,21 +6,23 @@
 <title>Search - edodnan</title>
 
 <style>
-h3 { color: black; }
+/* GENERAL */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   background-color: #f8f0ff;
 }
+h1, h2, h3, p {
+  margin: 0;
+}
+h3 { color: black; }
 
-/* Header */
+/* HEADER */
 header {
   background-color: #7400B5;
   padding: 10px;
 }
-header h1 {
-  padding: 10px 0;
-}
+header h1 { padding: 10px 0; }
 .links-container {
   display: flex;
   gap: 20px;
@@ -41,7 +43,7 @@ header h1 {
   text-decoration: none;
 }
 
-/* Black square */
+/* BLACKSQUARE */
 .blacksquare {
   display: flex;
   background-color: black;
@@ -57,12 +59,11 @@ header h1 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-left: 20px;
 }
-.up > div:first-child {
-  height: 40px;
-}
+.up > div:first-child { height: 40px; }
 
-/* Search */
+/* SEARCH */
 .search-container {
   padding: 10px;
   background: #f2f2f2;
@@ -86,9 +87,11 @@ header h1 {
   cursor: pointer;
   border-radius: 8px;
   border: 1px solid #ccc;
+  background-color: white;
 }
+.search-button:hover { background-color: #e0e0e0; }
 
-/* Search results (4 visible) */
+/* SEARCH RESULTS (4 visible, scroll) */
 #result {
   display: flex;
   flex-direction: column;
@@ -98,20 +101,24 @@ header h1 {
   margin-top: 8px;
 }
 .suggestion {
-  background-color: #f2f2f2;
-  border-radius: 8px;
-  padding: 10px;
-  border: 1px solid #ccc;
   height: 52px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #f2f2f2;
   display: flex;
   align-items: center;
   cursor: pointer;
 }
-.suggestion:hover {
-  background-color: #e0e0e0;
+.suggestion:hover { background-color: #e0e0e0; }
+
+/* PLASMA TITLE + TEXT */
+.up h1, .up p {
+  color: black;
+  padding: 10px 0 0 0;
 }
 
-/* Horizontal scroll */
+/* HORIZONTAL SCROLL */
 .horizontal-scroll {
   display: flex;
   gap: 16px;
@@ -131,21 +138,14 @@ header h1 {
   height: 200px;
   object-fit: cover;
 }
-.card h3 {
-  padding: 10px;
-}
+.card h3 { padding: 10px; }
 
-/* Footer */
+/* FOOTER */
 footer {
   background: #222;
   color: white;
   text-align: center;
   padding: 15px;
-}
-
-h1, h2, p {
-  color: white;
-  margin: 0;
 }
 </style>
 </head>
@@ -165,45 +165,33 @@ h1, h2, p {
 </header>
 
 <main>
-
   <!-- BLACKSQUARE -->
- <div class="blacksquare">
-  <a href="search/plazma:-the-fourth-state-of-matter.html">
-    <img src="https://learn.edodnan.com.au/IMG/Plasma.png" alt="Plasma">
-  </a>
+  <div class="blacksquare">
+    <a href="search/plazma:-the-fourth-state-of-matter.html">
+      <img src="https://learn.edodnan.com.au/IMG/Plasma.png" alt="Plasma">
+    </a>
 
-  <div class="up">
-    <div></div>
+    <div class="up">
+      <div></div>
 
-    <!-- SEARCH -->
-    <div class="search-container">
-      <label>Search the site:</label>
-      <div class="search-row">
-        <input id="site-search" class="search-box" placeholder="Enter query...">
-        <button class="search-button" onclick="handleSearch()">Search</button>
+      <!-- SEARCH -->
+      <div class="search-container">
+        <label>Search the site:</label>
+        <div class="search-row">
+          <input id="site-search" class="search-box" placeholder="Enter query..." autocomplete="off">
+          <button class="search-button" onclick="handleSearch()">Search</button>
+        </div>
+        <div id="result"></div>
       </div>
-      <div id="result"></div>
+
+      <!-- PLASMA TITLE + TEXT UNDER SEARCH -->
+      <h1>Plazma: the fourth state of matter</h1>
+      <p>Explore the fourth and unknown state of matter, see its capabilities and find out how and why it's so powerful.</p>
+      <p>Plazma is undoubtedly an interesting state of matter, because it's the fourth one. We all learned about the three states of matter: solid, liquid and gas, but plazma enters the arena as the fourth state of matter. It undoubtedly wins in terms of power, but also curiosity and fascination.</p>
     </div>
-
-    <!-- 🔥 TEXT UNDER SEARCH, RIGHT OF IMAGE (LIKE BEFORE) -->
-    <h1 style="padding:10px;">
-      Plazma: the fourth state of matter
-    </h1>
-
-    <p style="padding:10px;">
-      Explore the fourth and unknown state of matter, see its capabilities and find out how and why it's so powerful.
-    </p>
-
-    <p style="padding:10px;">
-      Plazma is undoubtedly an interesting state of matter, because it's the fourth one. We all learned about the three states of matter: solid, liquid and gas, but plazma enters the arena as the fourth state of matter. It undoubtedly wins in terms of power, but also curiosity and fascination.
-    </p>
-
   </div>
-</div>
 
-
- 
-  <!-- BELOW CONTENT -->
+  <!-- BELOW BLACKSQUARE -->
   <h2 style="color:black; padding:10px;">See our newest reads</h2>
 
   <div class="horizontal-scroll">
@@ -213,11 +201,74 @@ h1, h2, p {
     <a class="card" href="#"><h3>Plazma</h3><img src="IMG/Plasma.png"></a>
   </div>
 
+  <button style="margin:10px; padding:10px; border-radius:8px;">
+    <a href="https://learn.edodnan.com.au/us.html" style="text-decoration:none;">Learn about us here</a>
+  </button>
 </main>
 
 <footer>
   <p>© 2025 Edodnan</p>
 </footer>
+
+<!-- FIRESTORE SEARCH JS -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDsBh4fUaeuEFZrp24c7yLYopZrQ4iFcV0",
+  authDomain: "search-bb49c.firebaseapp.com",
+  projectId: "search-bb49c"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let pages = [];
+
+// Load articles
+async function loadArticles() {
+  const snap = await getDocs(collection(db, "articles"));
+  pages = snap.docs.map(doc => doc.data());
+}
+loadArticles();
+
+// Similarity score
+function similarity(a, b) {
+  let score = 0;
+  for (const char of a) if (b.includes(char)) score++;
+  return score;
+}
+
+// Handle search
+window.handleSearch = function () {
+  const input = document.getElementById("site-search").value.toLowerCase().trim();
+  const result = document.getElementById("result");
+  result.innerHTML = "";
+  if (!input) return;
+
+  const matches = pages
+    .map(p => ({ ...p, score: similarity(input, p.title.toLowerCase()) }))
+    .filter(p => p.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 20);
+
+  if (!matches.length) {
+    result.textContent = "No results found.";
+    return;
+  }
+
+  matches.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "suggestion";
+    div.textContent = p.title;
+    div.onclick = () => {
+      window.location.href = "https://learn.edodnan.com.au/search/" + p.slug + ".html";
+    };
+    result.appendChild(div);
+  });
+};
+</script>
 
 </body>
 </html>
