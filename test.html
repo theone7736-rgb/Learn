@@ -113,8 +113,12 @@ header h1 { padding: 10px 0; }
 .suggestion:hover { background-color: #e0e0e0; }
 
 /* PLASMA TITLE + TEXT */
-.up h1, .up p {
-  color: black;
+.up h1 {
+  color: white; /* 🔹 First h1 white */
+  padding: 10px 0 0 0;
+}
+.up p {
+  color: white; /* 🔹 Text below search white */
   padding: 10px 0 0 0;
 }
 
@@ -233,7 +237,7 @@ async function loadArticles() {
 }
 loadArticles();
 
-// Similarity score
+// Simple similarity
 function similarity(a, b) {
   let score = 0;
   for (const char of a) if (b.includes(char)) score++;
