@@ -166,7 +166,7 @@ h1, h2, p {
 
 <main>
 
-  <!-- BLACKSQUARE ONLY -->
+  <!-- BLACKSQUARE -->
   <div class="blacksquare">
     <a href="search/plazma:-the-fourth-state-of-matter.html">
       <img src="https://learn.edodnan.com.au/IMG/Plasma.png" alt="Plasma">
@@ -181,86 +181,41 @@ h1, h2, p {
           <input id="site-search" class="search-box" placeholder="Enter query...">
           <button class="search-button" onclick="handleSearch()">Search</button>
         </div>
+
+        <!-- TEXT UNDER SEARCH (UNCHANGED) -->
         <div id="result"></div>
       </div>
-
-      <h1><br>Plazma: the fourth state of matter</h1>
-      <p><br>Explore the fourth and unknown state of matter.</p>
     </div>
   </div>
 
-  <!-- EVERYTHING BELOW BLACKSQUARE -->
+  <!-- TITLE & TEXT BELOW BLACKSQUARE -->
+  <h1 style="color:black; padding:10px;">
+    Plazma: the fourth state of matter
+  </h1>
+
+  <p style="color:black; padding:10px;">
+    Explore the fourth and unknown state of matter, see its capabilities and find out how and why it's so powerful.
+  </p>
+
+  <p style="color:black; padding:10px;">
+    Plazma is undoubtedly an interesting state of matter, because it's the fourth one. We all learned about the three states of matter: solid, liquid and gas, but plazma enters the arena as the fourth state of matter. It undoubtedly wins in terms of power, but also curiosity and fascination.
+  </p>
+
+  <!-- BELOW CONTENT -->
   <h2 style="color:black; padding:10px;">See our newest reads</h2>
 
   <div class="horizontal-scroll">
-    <a class="card" href="#">
-      <h3>Compounds, atoms and nuclei</h3>
-      <img src="IMG/Atom.png">
-    </a>
-    <a class="card" href="#">
-      <h3>TON: The biggest black hole</h3>
-      <img src="IMG/Black-hole.png">
-    </a>
-    <a class="card" href="#">
-      <h3>AI: Everything you need to know</h3>
-      <img src="IMG/AI.png">
-    </a>
-    <a class="card" href="#">
-      <h3>Plazma</h3>
-      <img src="IMG/Plasma.png">
-    </a>
+    <a class="card" href="#"><h3>Compounds, atoms and nuclei</h3><img src="IMG/Atom.png"></a>
+    <a class="card" href="#"><h3>TON: The biggest black hole</h3><img src="IMG/Black-hole.png"></a>
+    <a class="card" href="#"><h3>AI: Everything you need to know</h3><img src="IMG/AI.png"></a>
+    <a class="card" href="#"><h3>Plazma</h3><img src="IMG/Plasma.png"></a>
   </div>
-
-  <button style="margin:10px; padding:10px; border-radius:8px;">
-    <a href="https://learn.edodnan.com.au/us.html" style="text-decoration:none;">
-      Learn about us here
-    </a>
-  </button>
 
 </main>
 
 <footer>
   <p>© 2025 Edodnan</p>
 </footer>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDsBh4fUaeuEFZrp24c7yLYopZrQ4iFcV0",
-  authDomain: "search-bb49c.firebaseapp.com",
-  projectId: "search-bb49c"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-let pages = [];
-
-async function loadArticles() {
-  const snap = await getDocs(collection(db, "articles"));
-  pages = snap.docs.map(d => d.data());
-}
-loadArticles();
-
-window.handleSearch = function () {
-  const input = document.getElementById("site-search").value.toLowerCase();
-  const result = document.getElementById("result");
-  result.innerHTML = "";
-  if (!input) return;
-
-  pages.forEach(p => {
-    if (p.title.toLowerCase().includes(input)) {
-      const div = document.createElement("div");
-      div.className = "suggestion";
-      div.textContent = p.title;
-      div.onclick = () => location.href =
-        "https://learn.edodnan.com.au/search/" + p.slug + ".html";
-      result.appendChild(div);
-    }
-  });
-};
-</script>
 
 </body>
 </html>
