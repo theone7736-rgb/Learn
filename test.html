@@ -6,7 +6,6 @@
 <title>Search - edodnan</title>
 
 <style>
-/* General text styles */
 h3 { color: black; }
 body {
   font-family: Arial, sans-serif;
@@ -42,7 +41,7 @@ header h1 {
   text-decoration: none;
 }
 
-/* Black square section */
+/* Black square */
 .blacksquare {
   display: flex;
   background-color: black;
@@ -87,10 +86,9 @@ header h1 {
   cursor: pointer;
   border-radius: 8px;
   border: 1px solid #ccc;
-  background-color: white;
 }
 
-/* RESULTS — ONLY 4 VISIBLE */
+/* Search results (4 visible) */
 #result {
   display: flex;
   flex-direction: column;
@@ -98,40 +96,27 @@ header h1 {
   max-height: calc(4 * 52px);
   overflow-y: auto;
   margin-top: 8px;
-  padding-right: 4px;
 }
-
-#result::-webkit-scrollbar {
-  width: 6px;
-}
-#result::-webkit-scrollbar-thumb {
-  background: #bbb;
-  border-radius: 10px;
-}
-
-/* Individual result */
 .suggestion {
   background-color: #f2f2f2;
   border-radius: 8px;
   padding: 10px;
-  cursor: pointer;
-  color: black;
   border: 1px solid #ccc;
-  font-size: 16px;
   height: 52px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .suggestion:hover {
   background-color: #e0e0e0;
 }
 
-/* Horizontal scroll section */
+/* Horizontal scroll */
 .horizontal-scroll {
   display: flex;
   gap: 16px;
   overflow-x: auto;
-  padding: 10px 0;
+  padding: 10px;
 }
 .card {
   width: 230px;
@@ -180,8 +165,12 @@ h1, h2, p {
 </header>
 
 <main>
+
+  <!-- BLACKSQUARE ONLY -->
   <div class="blacksquare">
-    <img src="https://learn.edodnan.com.au/IMG/Plasma.png">
+    <a href="search/plazma:-the-fourth-state-of-matter.html">
+      <img src="https://learn.edodnan.com.au/IMG/Plasma.png" alt="Plasma">
+    </a>
 
     <div class="up">
       <div></div>
@@ -192,12 +181,47 @@ h1, h2, p {
           <input id="site-search" class="search-box" placeholder="Enter query...">
           <button class="search-button" onclick="handleSearch()">Search</button>
         </div>
-
         <div id="result"></div>
       </div>
+
+      <h1><br>Plazma: the fourth state of matter</h1>
+      <p><br>Explore the fourth and unknown state of matter.</p>
     </div>
   </div>
+
+  <!-- EVERYTHING BELOW BLACKSQUARE -->
+  <h2 style="color:black; padding:10px;">See our newest reads</h2>
+
+  <div class="horizontal-scroll">
+    <a class="card" href="#">
+      <h3>Compounds, atoms and nuclei</h3>
+      <img src="IMG/Atom.png">
+    </a>
+    <a class="card" href="#">
+      <h3>TON: The biggest black hole</h3>
+      <img src="IMG/Black-hole.png">
+    </a>
+    <a class="card" href="#">
+      <h3>AI: Everything you need to know</h3>
+      <img src="IMG/AI.png">
+    </a>
+    <a class="card" href="#">
+      <h3>Plazma</h3>
+      <img src="IMG/Plasma.png">
+    </a>
+  </div>
+
+  <button style="margin:10px; padding:10px; border-radius:8px;">
+    <a href="https://learn.edodnan.com.au/us.html" style="text-decoration:none;">
+      Learn about us here
+    </a>
+  </button>
+
 </main>
+
+<footer>
+  <p>© 2025 Edodnan</p>
+</footer>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -206,10 +230,7 @@ import { getFirestore, collection, getDocs } from "https://www.gstatic.com/fireb
 const firebaseConfig = {
   apiKey: "AIzaSyDsBh4fUaeuEFZrp24c7yLYopZrQ4iFcV0",
   authDomain: "search-bb49c.firebaseapp.com",
-  projectId: "search-bb49c",
-  storageBucket: "search-bb49c.firebasestorage.app",
-  messagingSenderId: "24923619733",
-  appId: "1:24923619733:web:5979c3f590f77d75ae769c"
+  projectId: "search-bb49c"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -218,41 +239,28 @@ let pages = [];
 
 async function loadArticles() {
   const snap = await getDocs(collection(db, "articles"));
-  pages = snap.docs.map(doc => doc.data());
+  pages = snap.docs.map(d => d.data());
 }
 loadArticles();
 
-function similarity(a, b) {
-  let matches = 0;
-  for (let c of a) if (b.includes(c)) matches++;
-  return matches;
-}
-
 window.handleSearch = function () {
-  const input = document.getElementById("site-search").value.toLowerCase().trim();
-  const resultDiv = document.getElementById("result");
-  resultDiv.innerHTML = "";
+  const input = document.getElementById("site-search").value.toLowerCase();
+  const result = document.getElementById("result");
+  result.innerHTML = "";
   if (!input) return;
 
-  pages
-    .map(p => ({ ...p, score: similarity(input, p.title.toLowerCase()) }))
-    .filter(p => p.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .forEach(p => {
+  pages.forEach(p => {
+    if (p.title.toLowerCase().includes(input)) {
       const div = document.createElement("div");
       div.className = "suggestion";
       div.textContent = p.title;
-      div.onclick = () => {
-        window.location.href = "https://learn.edodnan.com.au/search/" + p.slug + ".html";
-      };
-      resultDiv.appendChild(div);
-    });
+      div.onclick = () => location.href =
+        "https://learn.edodnan.com.au/search/" + p.slug + ".html";
+      result.appendChild(div);
+    }
+  });
 };
 </script>
-
-<footer>
-  <p>© 2025 Edodnan</p>
-</footer>
 
 </body>
 </html>
