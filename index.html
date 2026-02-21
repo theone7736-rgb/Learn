@@ -152,6 +152,14 @@ footer {
   padding: 15px;
 }
 </style>
+  <script>
+  (function () {
+    const isPhone = window.matchMedia("(max-width: 768px)").matches;
+    if (isPhone && !window.location.pathname.startsWith("/mobile.html")) {
+      window.location.replace("/mobile.html");
+    }
+  })();
+</script>
 </head>
 
 <body>
