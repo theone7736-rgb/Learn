@@ -226,32 +226,37 @@ footer {
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-  
+
 const firebaseConfig = {
   apiKey: "AIzaSyDsBh4fUaeuEFZrp24c7yLYopZrQ4iFcV0",
   authDomain: "search-bb49c.firebaseapp.com",
   projectId: "search-bb49c",
-  storageBucket: "search-bb49c.firebasestorage.app",
+  storageBucket: "search-bb49c.appspot.com",
   messagingSenderId: "24923619733",
-  appId: "1:24923619733:web:5979c3f590f77d75ae769c",
-  measurementId: "G-3M4KLQTXVX"
+  appId: "1:24923619733:web:5979c3f590f77d75ae769c"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 let pages = [];
+let loaded = false;
 
-// Load articles
+// Load articles safely
 async function loadArticles() {
-  const snap = await getDocs(collection(db, "articles"));
-  pages = snap.docs.map(doc => doc.data());
+  try {
+    const snap = await getDocs(collection(db, "articles"));
+    pages = snap.docs.map(doc => doc.data());
+    loaded = true;
+    console.log("Articles loaded:", pages.length);
+  } catch (err) {
+    console.error("Firestore error:", err);
+  }
 }
+
 loadArticles();
 
-// Simple similarity
+// Simple similarity function
 function similarity(a, b) {
   let score = 0;
   for (const char of a) if (b.includes(char)) score++;
@@ -263,10 +268,19 @@ window.handleSearch = function () {
   const input = document.getElementById("site-search").value.toLowerCase().trim();
   const result = document.getElementById("result");
   result.innerHTML = "";
+
+  if (!loaded) {
+    result.textContent = "Loading articles… please wait.";
+    return;
+  }
+
   if (!input) return;
 
   const matches = pages
-    .map(p => ({ ...p, score: similarity(input, p.title.toLowerCase()) }))
+    .map(p => ({
+      ...p,
+      score: similarity(input, (p.title || "").toLowerCase())
+    }))
     .filter(p => p.score > 0)
     .sort((a, b) => b.score - a.score)
     .slice(0, 20);
@@ -281,7 +295,8 @@ window.handleSearch = function () {
     div.className = "suggestion";
     div.textContent = p.title;
     div.onclick = () => {
-      window.location.href = "https://learn.edodnan.com.au/search/" + p.slug + ".html";
+      window.location.href =
+        "https://learn.edodnan.com.au/search/" + p.slug + ".html";
     };
     result.appendChild(div);
   });
