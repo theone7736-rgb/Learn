@@ -277,68 +277,90 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+/* 🔹 Firebase config */
 const firebaseConfig = {
   apiKey: "AIzaSyDsBh4fUaeuEFZrp24c7yLYopZrQ4iFcV0",
   authDomain: "search-bb49c.firebaseapp.com",
-  projectId: "search-bb49c",
-  storageBucket: "search-bb49c.firebasestorage.app",
-  messagingSenderId: "24923619733",
-  appId: "1:24923619733:web:5979c3f590f77d75ae769c",
-  measurementId: "G-3M4KLQTXVX"
+  projectId: "search-bb49c"
 };
 
+/* 🔹 Init Firebase */
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+/* 🔹 State */
 let pages = [];
+let loaded = false;
 
+/* 🔹 Load articles */
 async function loadArticles() {
-  const snap = await getDocs(collection(db, "articles"));
-  pages = snap.docs.map(doc => doc.data());
+  try {
+    const snap = await getDocs(collection(db, "articles"));
+    pages = snap.docs.map(doc => doc.data());
+    loaded = true;
+  } catch (err) {
+    console.error("Failed to load articles:", err);
+  }
 }
 loadArticles();
 
-function similarity(a, b) {
-  let matches = 0;
-  for (let char of a) if (b.includes(char)) matches++;
-  return matches;
+/* 🔹 Word-based similarity (better results) */
+function similarity(input, title) {
+  const words = input.split(/\s+/);
+  let score = 0;
+
+  words.forEach(word => {
+    if (title.includes(word)) score += 2;
+  });
+
+  return score;
 }
 
-window.handleSearch = function() {
-  const input = document.getElementById("site-search").value.toLowerCase().trim().replace(/-/g, " ");
-  const resultDiv = document.getElementById("result");
-  resultDiv.innerHTML = "";
+/* 🔹 Search handler */
+window.handleSearch = function () {
+  const result = document.getElementById("result");
+  result.innerHTML = "";
+
+  if (!loaded) {
+    result.textContent = "Loading articles… please wait.";
+    return;
+  }
+
+  const input = document
+    .getElementById("site-search")
+    .value.toLowerCase()
+    .trim();
+
   if (!input) return;
 
-  const exact = pages.find(p => p.title.toLowerCase() === input);
-  if (exact) {
-    window.location.href = "https://learn.edodnan.com.au/search/" + exact.slug + ".html";
-    return;
-  }
-
-  const scored = pages
-    .map(p => ({ ...p, score: similarity(input, p.title.toLowerCase()) }))
+  const matches = pages
+    .map(p => ({
+      ...p,
+      score: similarity(input, p.title.toLowerCase())
+    }))
     .filter(p => p.score > 0)
     .sort((a, b) => b.score - a.score)
-    .slice(0, 4);
+    .slice(0, 20);
 
-  if (!scored.length) {
-    resultDiv.textContent = "No results found.";
+  if (!matches.length) {
+    result.textContent = "No results found.";
     return;
   }
 
-  scored.forEach(p => {
+  matches.forEach(p => {
     const div = document.createElement("div");
     div.className = "suggestion";
     div.textContent = p.title;
     div.onclick = () => {
-      window.location.href = "https://learn.edodnan.com.au/search/" + p.slug + ".html";
+      window.location.href =
+        "https://learn.edodnan.com.au/search/" +
+        p.slug +
+        ".html";
     };
-    resultDiv.appendChild(div);
+    result.appendChild(div);
   });
 };
 </script>
-
 <footer>
   <p><u>Want to see more?</u></p>
   <div class="links-container" style="flex-direction: row; flex-wrap: wrap; gap: 5px; justify-content: center;">
