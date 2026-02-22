@@ -224,13 +224,17 @@ footer {
 
 <!-- FIRESTORE SEARCH JS -->
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+  
 const firebaseConfig = {
   apiKey: "AIzaSyDsBh4fUaeuEFZrp24c7yLYopZrQ4iFcV0",
   authDomain: "search-bb49c.firebaseapp.com",
-  projectId: "search-bb49c"
+  projectId: "search-bb49c",
+  storageBucket: "search-bb49c.firebasestorage.app",
+  messagingSenderId: "24923619733",
+  appId: "1:24923619733:web:5979c3f590f77d75ae769c",
+  measurementId: "G-3M4KLQTXVX"
 };
 
 const app = initializeApp(firebaseConfig);
