@@ -304,7 +304,7 @@ window.handleSearch = function () {
     .map(p => ({ ...p, score: similarity(input, p.title.toLowerCase()) }))
     .filter(p => p.score > 0)
     .sort((a, b) => b.score - a.score)
-    .slice(0, 20);
+    .slice(0, 4);
 
   if (!matches.length) {
     result.textContent = "No results found.";
