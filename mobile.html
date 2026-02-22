@@ -277,67 +277,40 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* 🔹 Firebase config */
 const firebaseConfig = {
   apiKey: "AIzaSyDsBh4fUaeuEFZrp24c7yLYopZrQ4iFcV0",
   authDomain: "search-bb49c.firebaseapp.com",
   projectId: "search-bb49c"
 };
 
-/* 🔹 Init Firebase */
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-/* 🔹 State */
 let pages = [];
-let loaded = false;
 
-/* 🔹 Load articles */
+// Load articles
 async function loadArticles() {
-  try {
-    const snap = await getDocs(collection(db, "articles"));
-    pages = snap.docs.map(doc => doc.data());
-    loaded = true;
-  } catch (err) {
-    console.error("Failed to load articles:", err);
-  }
+  const snap = await getDocs(collection(db, "articles"));
+  pages = snap.docs.map(doc => doc.data());
 }
 loadArticles();
 
-/* 🔹 Word-based similarity (better results) */
-function similarity(input, title) {
-  const words = input.split(/\s+/);
+// Simple similarity
+function similarity(a, b) {
   let score = 0;
-
-  words.forEach(word => {
-    if (title.includes(word)) score += 2;
-  });
-
+  for (const char of a) if (b.includes(char)) score++;
   return score;
 }
 
-/* 🔹 Search handler */
+// Handle search
 window.handleSearch = function () {
+  const input = document.getElementById("site-search").value.toLowerCase().trim();
   const result = document.getElementById("result");
   result.innerHTML = "";
-
-  if (!loaded) {
-    result.textContent = "Loading articles… please wait.";
-    return;
-  }
-
-  const input = document
-    .getElementById("site-search")
-    .value.toLowerCase()
-    .trim();
-
   if (!input) return;
 
   const matches = pages
-    .map(p => ({
-      ...p,
-      score: similarity(input, p.title.toLowerCase())
-    }))
+    .map(p => ({ ...p, score: similarity(input, p.title.toLowerCase()) }))
     .filter(p => p.score > 0)
     .sort((a, b) => b.score - a.score)
     .slice(0, 20);
@@ -352,10 +325,7 @@ window.handleSearch = function () {
     div.className = "suggestion";
     div.textContent = p.title;
     div.onclick = () => {
-      window.location.href =
-        "https://learn.edodnan.com.au/search/" +
-        p.slug +
-        ".html";
+      window.location.href = "https://learn.edodnan.com.au/search/" + p.slug + ".html";
     };
     result.appendChild(div);
   });
