@@ -4,8 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plazma: the fourth state of matter</title>
-  <style>
-    button {
+ <!-- Google Fonts: Nunito + Saira -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Saira:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<style>
+  /* Reset */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Headings stay default (Arial) */
+  h1, h2, h3, h4 {
+    font-family: Arial, sans-serif;
+  }
+
+  /* Normal text uses Saira */
+  body {
+    font-family: 'Saira', sans-serif;
+    width: 100%;
+    line-height: 1.6;
+    background-color: white;
+  }
+
+  button {
     background-color: white;
     font-size: 15px;
     padding: 12px;
@@ -13,151 +38,99 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin: 5px 0;
+    width: 100%;
   }
-    header {
-  height: 70px;
-  background: #9130e6;
-  display: flex;
-  align-items: center;
-  gap: 0px;
-  padding: 0px;
-  color: white;
-  flex-wrap: wrap;
-  position: sticky;
-  top: 0px; /* sticks below the top-bar */
-  z-index: 99;
-}
 
-    /* Reset */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  a {
+    color: white;
+    text-decoration: none;
+  }
 
-    body {
-      font-family: Arial, sans-serif;
-      width: 100%;
-      line-height: 1.6;
-    }
+  /* Top bar */
+  .top-bar {
+    height: 70px;
+    background: #821dcf;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20px;
+    position: relative;
+    color: white;
+  }
 
-    a {
-      color: white;
-      text-decoration: none;
-    }
+  .top-bar .center-text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
 
-    /* Top bar */
-    .top-bar {
-      height: 70px;
-      background: #821dcf;
-      display: flex;
-      justify-content: flex-end; /* Sign-in to right */
-      align-items: center;
-      padding: 0 20px;
-      position: relative;
-      color: white;
-    }
+  /* Header navigation */
+  header {
+    height: 70px;
+    background: #9130e6;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 20px;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+  }
 
-    .top-bar .center-text {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-    }
+  /* Page layout */
+  .page {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    flex-wrap: wrap;
+  }
 
-    .top-bar h2,
-    .top-bar h4 {
-      margin: 0;
-    }
+  main {
+    flex: 1;
+    max-width: 800px;
+    margin: 30px;
+  }
 
-    /* Responsive top-bar for mobile */
-    @media (max-width: 600px) {
-      .top-bar {
-        flex-direction: column;
-        height: auto;
-        padding: 10px 20px;
-        align-items: center;
-      }
+  main p {
+    margin-bottom: 15px;
+  }
 
-      .top-bar .center-text {
-        position: static;
-        transform: none;
-        margin-bottom: 10px;
-      }
-    }
+  main h3 {
+    margin: 30px 0 10px;
+    font-size: 25px;
+  }
 
-    /* Header navigation */
-    header {
-      height: 70px;
-      background: #9130e6;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      padding: 0 20px;
-      color: white;
-      flex-wrap: wrap;
-    }
+  /* Sidebar */
+  .right-rectangle {
+    text-align: center;
+    border-radius: 25px;
+    outline: 1px solid black;
+    width: 250px;
+    height: 300px;
+    background: white;
+    position: sticky;
+    top: 90px;
+    padding: 15px;
+  }
 
-    header h3 {
-      margin-right: 10px;
-    }
+  /* Footer */
+  footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 20px;
+  }
 
-    header a u {
-      text-decoration: underline;
-    }
-
-    /* Page layout */
-    .page {
-      display: flex;
-      gap: 30px;
-      padding: 20px;
-      flex-wrap: wrap;
-    }
-
-    main {
-      flex: 1;
-      max-width: 800px;
-      margin: 30px;
-    }
-
-    main p {
-      margin-bottom: 15px;
-    }
-
-    main h1, main h3 {
-      margin: 20px 0 10px;
-    }
-
-    /* Right rectangle / sidebar */
+  /* Responsive */
+  @media (max-width: 900px) {
     .right-rectangle {
-      text-align: center;
-      border-radius: 25px;
-      outline: 1px solid black;
-      width: 250px;
-      height: 300px;
-      background: white;
-      position: sticky;
-      top: 90px;
+      display: none;
     }
-
-    /* Footer */
-    footer {
-      background: #222;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 900px) {
-      .right-rectangle {
-        display: none;
-      }
-    }
-    main h3 {
-    font-size: 25px;  
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
