@@ -17,7 +17,7 @@
 We want to be as anti AI as possible, using only human sorced facts with human writers in human code. AI cannot and should not be able to add information to the human library - expecially fake information. We make sure our facts are ethically sorces and not from shadey sites or sorces that are not credable/validted.
 
 ## How to report or suggest
-If you have found a suggestion, issue or problem, technical or not, please report it [here](https://forms.gle/socDJBEtxq4DPAXB6) so that we can take action as soon as possible so that we can make the site as best as we can and make it enjoyable for everyone. Thank you for helspng us. If you have a suggestion, also report it [here,](https://forms.gle/socDJBEtxq4DPAXB6)so that we can update the site and make it better.
+If you have found a suggestion, issue or problem, technical or not, please report it [here](https://forms.gle/socDJBEtxq4DPAXB6) so that we can take action as soon as possible so that we can make the site as best as we can and make it enjoyable for everyone. Thank you for helspng us. If you have a suggestion, also report it [here](https://forms.gle/socDJBEtxq4DPAXB6), so that we can update the site and make it better.
 
 The previous paragraph is in our security policy.
 
