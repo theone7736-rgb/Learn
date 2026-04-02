@@ -13,7 +13,7 @@
 ## What is Learn.edodnan.com.au
 [Learn.Edodnan.com.au](Learn.edodnan.com.au) is a branch of [Edodnan.com.au](https://edodnan.com.au) that focuses on being a place where all users can learn real things together, safely. We want everyone get acess to reliable information created by our writers and editors and fact-checked to that you are up-to-date on the coolest science facts. But we also teach things about math, computers,and we would love expanding this to something bigger.
 
-### We and AI
+#### We and AI
 We want to be as anti AI as possible, using only human sorced facts with human writers in human code. AI cannot and should not be able to add information to the human library - expecially fake information. We make sure our facts are ethically sorces and not from shadey sites or sorces that are not credable/validted.
 
 ## How to report or suggest
