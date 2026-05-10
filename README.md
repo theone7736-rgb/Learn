@@ -4,7 +4,7 @@
 [![Open Edodnan](https://img.shields.io/badge/Open-Scratch-orange)](https://scratch.mit.edu/users/Dinominatot/) 
 [![Open Edodnan](https://img.shields.io/badge/Open-Youtube-red)](https://scratch.mit.edu/users/Dinominatot/) 
 [![Open Learn](https://img.shields.io/badge/Open-Learn-green)](https://Learn.edodnan.com.au/)
-[![Open Learn](https://img.shields.io/badge/Our-Github_page-coral)](https://github.com/theone7736-rgb/Learn/tree/main)
+[![Open Learn](https://img.shields.io/badge/Our-Github_page-coral)](https://facts.edodnan.com.au)
 ## Contents
 - [What is Learn.edodnan.com.au](#what-is-learnedodnancomau)
 - [How to report or suggest](#how-to-report-or-suggest)
